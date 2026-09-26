@@ -481,48 +481,199 @@
   }
 }
 
+/* Mobile Search Pill Button & Mobile Phone Button */
+.mobileSearchToggleBtn {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2px 3px 2px 10px;
+  background: #ffffff;
+  border: 1.5px solid #111827;
+  border-radius: 9999px;
+  cursor: pointer;
+  height: 34px;
+  min-width: 52px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+}
+
+.mobileSearchToggleBtn:hover {
+  border-color: #000000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.mobileSearchToggleIconWrap {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobilePhoneBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.mobilePhoneBtn:hover {
+  color: #000000;
+  background-color: #f1f5f9;
+}
+
+/* Mobile Search Dropdown Bar (Expanded) */
+.mobileSearchDropdownBar {
+  display: none;
+  width: 100%;
+  padding: 0.75rem 0.25rem 0.35rem;
+  animation: slideDownSearch 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDownSearch {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobileSearchForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.mobileSearchFormIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+}
+
+.mobileSearchInput {
+  flex: 1;
+  padding: 0.65rem 2.2rem 0.65rem 2.5rem;
+  border: 1.5px solid #111827;
+  border-radius: 9999px;
+  font-size: 0.92rem;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mobileSearchInput:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.mobileSearchClearBtn {
+  position: absolute;
+  right: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e2e8f0;
+  color: #475569;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.mobileSearchCloseBtn {
+  background: transparent;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+  padding: 0.4rem 0.25rem;
+  white-space: nowrap;
+}
+
+.mobileSearchCloseBtn:hover {
+  color: #000000;
+}
+
+.mobileSearchResults {
+  margin-top: 0.5rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 380px;
+  overflow-y: auto;
+}
+
 @media (max-width: 991px) {
   .announcementBanner,
   .utilityBar {
     display: none !important;
   }
   .mainNavRow {
-    padding: 0.65rem 1rem;
+    padding: 0.55rem 0.85rem;
   }
   .mainNavInner {
-    flex-wrap: wrap;
-    gap: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
   }
   .mobileMenuToggle {
     order: 1;
+    display: flex;
   }
   .logoLink {
     order: 2;
   }
+  .searchContainer {
+    display: none !important;
+  }
   .headerActions {
     order: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
     margin-left: auto;
-    gap: 0.5rem;
   }
   .actionItem {
+    display: none !important;
+  }
+  .mobileSearchToggleBtn {
+    display: inline-flex;
+  }
+  .mobilePhoneBtn {
+    display: inline-flex;
+  }
+  .mobileSearchDropdownBar {
+    display: block;
+  }
+  .cartText {
     display: none;
   }
-  .searchContainer {
-    order: 4;
-    width: 100%;
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
-  .searchInput {
-    padding: 0.55rem 2.8rem 0.55rem 1rem;
-    font-size: 0.88rem;
+  .cartButton {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.82rem;
   }
   .logoText {
-    font-size: 1.55rem;
-  }
-  .cartButton {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.82rem;
+    font-size: 1.45rem;
   }
 }
 

@@ -34,6 +34,24 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  // Mobile search state
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
+  const mobileSearchContainerRef = useRef<HTMLDivElement>(null);
+  const mobileSearchBtnRef = useRef<HTMLButtonElement>(null);
+
+  const toggleMobileSearch = () => {
+    setMobileSearchOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setTimeout(() => {
+          mobileSearchInputRef.current?.focus();
+        }, 100);
+      }
+      return next;
+    });
+  };
+
   // Filter products for search bar autocomplete
   useEffect(() => {
     if (searchQuery.trim().length > 1) {
@@ -59,6 +77,13 @@ export default function Header() {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setSearchOpen(false);
       }
+      if (
+        mobileSearchContainerRef.current &&
+        !mobileSearchContainerRef.current.contains(event.target as Node) &&
+        !mobileSearchBtnRef.current?.contains(event.target as Node)
+      ) {
+        setMobileSearchOpen(false);
+      }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -68,6 +93,7 @@ export default function Header() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setSearchOpen(false);
+      setMobileSearchOpen(false);
       // If there's an exact or first match, go to it or closest category
       const first = searchResults[0];
       if (first) {
@@ -131,7 +157,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Live Search Bar */}
+          {/* Live Search Bar (Desktop) */}
           <div className={styles.searchContainer} ref={searchRef}>
             <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
               <input
@@ -147,7 +173,7 @@ export default function Header() {
               </button>
             </form>
 
-            {/* Live Search Dropdown */}
+            {/* Live Search Dropdown (Desktop) */}
             {searchOpen && searchResults.length > 0 && (
               <div className={styles.searchDropdown}>
                 <div className={styles.searchSectionTitle}>Suggested Products & Models</div>
@@ -183,6 +209,30 @@ export default function Header() {
 
           {/* Right Header Actions */}
           <div className={styles.headerActions}>
+            {/* Mobile Search Toggle Pill Button (Matches user screenshot) */}
+            <button
+              ref={mobileSearchBtnRef}
+              type="button"
+              className={styles.mobileSearchToggleBtn}
+              onClick={toggleMobileSearch}
+              aria-label="Toggle Search"
+              aria-expanded={mobileSearchOpen}
+            >
+              <div className={styles.mobileSearchToggleIconWrap}>
+                <Search size={15} />
+              </div>
+            </button>
+
+            {/* Mobile Call Icon Button */}
+            <a
+              href="tel:8005703355"
+              className={styles.mobilePhoneBtn}
+              aria-label="Call Appliance Experts at 800-570-3355"
+            >
+              <Phone size={20} />
+            </a>
+
+            {/* Desktop Appliance Experts Contact */}
             <a href="tel:8005703355" className={styles.actionItem}>
               <Phone size={22} color="var(--primary-navy)" />
               <div className={styles.actionText}>
@@ -197,13 +247,90 @@ export default function Header() {
               aria-label="View Shopping Cart"
             >
               <ShoppingCart size={20} />
-              <span>Cart</span>
+              <span className={styles.cartText}>Cart</span>
               {totalItems > 0 && (
                 <span className={styles.cartCountBadge}>{totalItems}</span>
               )}
             </button>
           </div>
         </div>
+
+        {/* Mobile Expandable Search Bar */}
+        {mobileSearchOpen && (
+          <div className={styles.mobileSearchDropdownBar} ref={mobileSearchContainerRef}>
+            <form onSubmit={handleSearchSubmit} className={styles.mobileSearchForm}>
+              <Search size={18} className={styles.mobileSearchFormIcon} />
+              <input
+                ref={mobileSearchInputRef}
+                type="text"
+                className={styles.mobileSearchInput}
+                placeholder="Search brands, model #s (e.g. Bosch, Miele)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => searchQuery.trim().length > 1 && setSearchOpen(true)}
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className={styles.mobileSearchClearBtn}
+                  onClick={() => {
+                    setSearchQuery('');
+                    mobileSearchInputRef.current?.focus();
+                  }}
+                  aria-label="Clear Search Input"
+                >
+                  <X size={15} />
+                </button>
+              )}
+              <button
+                type="button"
+                className={styles.mobileSearchCloseBtn}
+                onClick={() => {
+                  setMobileSearchOpen(false);
+                  setSearchOpen(false);
+                }}
+              >
+                Cancel
+              </button>
+            </form>
+
+            {/* Mobile Search Suggestions Dropdown */}
+            {searchOpen && searchResults.length > 0 && (
+              <div className={styles.mobileSearchResults}>
+                <div className={styles.searchSectionTitle}>Suggested Products & Models</div>
+                {searchResults.map((product) => (
+                  <Link
+                    key={product.id}
+                    href={`/product/${product.id}`}
+                    className={styles.searchResultItem}
+                    onClick={() => {
+                      setMobileSearchOpen(false);
+                      setSearchOpen(false);
+                      setSearchQuery('');
+                    }}
+                  >
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={44}
+                      height={44}
+                      className={styles.searchResultThumb}
+                    />
+                    <div className={styles.searchResultInfo}>
+                      <div className={styles.searchResultName}>{product.name}</div>
+                      <div className={styles.searchResultMeta}>
+                        {product.brand} · Model: {product.modelNumber}
+                      </div>
+                    </div>
+                    <div className={styles.searchResultPrice}>
+                      ${product.price.toLocaleString()}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 4. Desktop Navigation Bar (ONLY USER-REQUESTED PAGES) */}
