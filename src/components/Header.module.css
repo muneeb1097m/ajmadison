@@ -481,9 +481,10 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 991px) {
+  .announcementBanner,
   .utilityBar {
-    display: none;
+    display: none !important;
   }
   .mainNavRow {
     padding: 0.65rem 1rem;
