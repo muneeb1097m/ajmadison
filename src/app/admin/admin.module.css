@@ -492,3 +492,153 @@
   color: #16a34a;
 }
 
+/* Image Gallery Manager inside Modal */
+.imageManagerSection {
+  grid-column: 1 / -1;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.imageManagerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.imageUploadBar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.85rem;
+}
+
+.imageCard {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.imageCardCover {
+  border-color: var(--primary-navy);
+  box-shadow: 0 0 0 2px rgba(26, 43, 109, 0.2);
+}
+
+.imagePreview {
+  width: 100%;
+  height: 105px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.imagePreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.imageSeqBadge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.imageCoverBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  z-index: 2;
+}
+
+.imageCardActions {
+  padding: 0.4rem 0.5rem;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.imageArrowBtn {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.imageArrowBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.imageArrowBtn:not(:disabled):hover {
+  background: #e2e8f0;
+  color: var(--primary-navy);
+}
+
+.imageDeleteBtn {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.imageDeleteBtn:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+

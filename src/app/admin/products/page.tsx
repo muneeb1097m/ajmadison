@@ -16,6 +16,9 @@ import {
   RotateCcw,
   LayoutGrid,
   List,
+  Upload,
+  ArrowLeft,
+  ArrowRight,
 } from 'lucide-react';
 import styles from '../admin.module.css';
 import { PRODUCTS, Product } from '@/data/products';
@@ -54,6 +57,53 @@ export default function AdminProductsPage() {
   const [viewMode, setViewMode] = useState<'list' | 'catalogue'>('list');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
+  // Pictures & gallery sequence state
+  const [imageList, setImageList] = useState<string[]>([]);
+  const [newImageUrl, setNewImageUrl] = useState('');
+
+  const handleAddUrlImage = () => {
+    const trimmed = newImageUrl.trim();
+    if (!trimmed) return;
+    setImageList((prev) => [...prev, trimmed]);
+    setNewImageUrl('');
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          const resultStr = event.target.result as string;
+          setImageList((prev) => [...prev, resultStr]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    e.target.value = '';
+  };
+
+  const handleRemoveImage = (indexToRemove: number) => {
+    setImageList((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+  };
+
+  const handleMoveImage = (fromIndex: number, toIndex: number) => {
+    setImageList((prev) => {
+      if (toIndex < 0 || toIndex >= prev.length) return prev;
+      const copy = [...prev];
+      const [moved] = copy.splice(fromIndex, 1);
+      copy.splice(toIndex, 0, moved);
+      return copy;
+    });
+  };
+
+  const handleSetAsCover = (index: number) => {
+    handleMoveImage(index, 0);
+  };
 
   // Form states
   const [formData, setFormData] = useState<Partial<Product>>({
@@ -156,12 +206,20 @@ export default function AdminProductsPage() {
       description: 'High efficiency appliance with state-of-the-art engineering.',
       specs: { dimensions: '27" W x 39" H', finish: 'Stainless Steel' },
     });
+    const defaultImg = 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80';
+    setImageList([defaultImg]);
+    setNewImageUrl('');
     setIsModalOpen(true);
   };
 
   const openEditModal = (product: Product) => {
     setEditingProduct(product);
     setFormData({ ...product });
+    const allImgs = Array.from(
+      new Set([product.image, ...(product.gallery || [])])
+    ).filter(Boolean);
+    setImageList(allImgs.length > 0 ? allImgs : [product.image]);
+    setNewImageUrl('');
     setIsModalOpen(true);
   };
 
@@ -172,6 +230,11 @@ export default function AdminProductsPage() {
       editingProduct?.id ||
       formData.id ||
       `${(formData.brand || 'appliance').toLowerCase()}-${(formData.modelNumber || Math.random().toString(36).substring(7)).toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+
+    const primaryImage =
+      imageList[0] ||
+      formData.image ||
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80';
 
     const completeProduct: Product = {
       id: productId,
@@ -187,8 +250,8 @@ export default function AdminProductsPage() {
       closeoutBadge: formData.closeoutBadge || '',
       rating: formData.rating || 4.8,
       reviewsCount: formData.reviewsCount || 10,
-      image: formData.image || 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
-      gallery: formData.gallery || [formData.image!],
+      image: primaryImage,
+      gallery: imageList.length > 0 ? imageList : [primaryImage],
       inStock: formData.inStock !== false,
       deliveryEstimate: formData.deliveryEstimate || 'Ships in 24-48 Hours',
       specs: formData.specs || {},
@@ -658,16 +721,140 @@ export default function AdminProductsPage() {
                   />
                 </div>
 
-                <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.35rem' }}>
-                    Product Image URL
-                  </label>
-                  <input
-                    type="url"
-                    value={formData.image || ''}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    style={{ width: '100%', padding: '0.65rem', borderRadius: '6px', border: '1px solid var(--border-medium)', outline: 'none' }}
-                  />
+                {/* Visual Pictures & Gallery Sequence Manager */}
+                <div className={styles.imageManagerSection}>
+                  <div className={styles.imageManagerHeader}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary-navy)' }}>
+                        Product Pictures & Gallery ({imageList.length} {imageList.length === 1 ? 'image' : 'images'})
+                      </label>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                        First image is the <strong>⭐ Main Cover</strong>. Use arrows to change sequence. Supports PNG, JPG, WEBP, SVG, GIF, AVIF, or local files.
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <input
+                        type="file"
+                        id="productImageUploadInput"
+                        accept="image/*"
+                        multiple
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                      />
+                      <label
+                        htmlFor="productImageUploadInput"
+                        className="btn-outline"
+                        style={{ padding: '0.42rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+                        title="Upload PNG, JPG, SVG, WEBP, GIF, AVIF files from your device"
+                      >
+                        <Upload size={14} />
+                        <span>Upload Images</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Add by URL input */}
+                  <div className={styles.imageUploadBar}>
+                    <input
+                      type="url"
+                      placeholder="Or paste any image URL (https://... or svg)..."
+                      value={newImageUrl}
+                      onChange={(e) => setNewImageUrl(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddUrlImage();
+                        }
+                      }}
+                      style={{ flex: 1, padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border-medium)', fontSize: '0.84rem', outline: 'none', background: 'white' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddUrlImage}
+                      className="btn-primary"
+                      style={{ padding: '0.5rem 0.9rem', fontSize: '0.82rem', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                    >
+                      <Plus size={14} /> Add Picture
+                    </button>
+                  </div>
+
+                  {/* Pictures Sequence Cards Grid */}
+                  {imageList.length === 0 ? (
+                    <div style={{ padding: '1.5rem', textAlign: 'center', background: 'white', borderRadius: '6px', border: '1px dashed #cbd5e1', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
+                      No pictures added yet. Upload files from your computer or paste an image URL above.
+                    </div>
+                  ) : (
+                    <div className={styles.imageGrid}>
+                      {imageList.map((imgUrl, index) => {
+                        const isCover = index === 0;
+                        return (
+                          <div
+                            key={index}
+                            className={`${styles.imageCard} ${isCover ? styles.imageCardCover : ''}`}
+                          >
+                            <div className={styles.imagePreview}>
+                              <span className={styles.imageSeqBadge}>#{index + 1}</span>
+                              {isCover && <span className={styles.imageCoverBadge}>⭐ Cover</span>}
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img src={imgUrl} alt={`Product photo ${index + 1}`} />
+                            </div>
+
+                            <div className={styles.imageCardActions}>
+                              <button
+                                type="button"
+                                disabled={index === 0}
+                                onClick={() => handleMoveImage(index, index - 1)}
+                                className={styles.imageArrowBtn}
+                                title="Move Left / Earlier in sequence"
+                              >
+                                <ArrowLeft size={13} />
+                              </button>
+
+                              {!isCover && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleSetAsCover(index)}
+                                  style={{
+                                    fontSize: '0.7rem',
+                                    fontWeight: 700,
+                                    color: '#2563eb',
+                                    background: '#eff6ff',
+                                    border: '1px solid #bfdbfe',
+                                    borderRadius: '4px',
+                                    padding: '2px 5px',
+                                    cursor: 'pointer',
+                                  }}
+                                  title="Make this the main cover photo"
+                                >
+                                  Cover
+                                </button>
+                              )}
+
+                              <button
+                                type="button"
+                                disabled={index === imageList.length - 1}
+                                onClick={() => handleMoveImage(index, index + 1)}
+                                className={styles.imageArrowBtn}
+                                title="Move Right / Later in sequence"
+                              >
+                                <ArrowRight size={13} />
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveImage(index)}
+                                className={styles.imageDeleteBtn}
+                                title="Remove this picture"
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
