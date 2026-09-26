@@ -10,6 +10,7 @@ import {
   LogOut,
   Shield,
   User,
+  Sparkles,
 } from 'lucide-react';
 import styles from './admin.module.css';
 
@@ -104,6 +105,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Package size={18} />
             <span className={styles.navLabel}>Products Catalog</span>
           </Link>
+
+          <Link
+            href="/admin/hero-banner"
+            className={`${styles.navLink} ${pathname === '/admin/hero-banner' ? styles.navLinkActive : ''}`}
+          >
+            <Sparkles size={18} />
+            <span className={styles.navLabel}>Hero Banner Editor</span>
+          </Link>
         </nav>
 
         {/* Bottom Left Footer Section */}
@@ -129,6 +138,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <h1 className={styles.topbarTitle}>
             {pathname === '/admin/products'
               ? 'Appliance Inventory & Management'
+              : pathname === '/admin/hero-banner'
+              ? 'Homepage Hero Banner Editor'
               : 'Bookings & Fulfillment Dashboard'}
           </h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>

@@ -14,6 +14,8 @@ import styles from './page.module.css';
 import ProductCard from '@/components/ProductCard';
 import { PRODUCTS, getProductsByCategory, CATEGORIES } from '@/data/products';
 
+import HomeHeroSection from '@/components/HomeHeroSection';
+
 export default function HomePage() {
   const closeoutProducts = PRODUCTS.filter((p) => p.isCloseout);
   const washersDryers = getProductsByCategory('washers-dryers').slice(0, 4);
@@ -24,55 +26,8 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* 1. HERO SECTION */}
-      <section className={styles.heroSection}>
-        <div className="container">
-          <div className={styles.heroGrid}>
-            <div>
-              <div className={styles.heroTagline}>
-                <Sparkles size={14} /> Official Appliance Headquarters
-              </div>
-              <h1 className={styles.heroHeading}>
-                Save Up To <span>50% Off</span> On Top Appliance Packages
-              </h1>
-              <p className={styles.heroDescription}>
-                Shop America&apos;s largest selection of luxury kitchen suites, whisper-quiet dishwashers, high-efficiency laundry pairs, and exclusive closeouts.
-              </p>
-              <div className={styles.heroButtons}>
-                <Link href="/closeout-deals" className="btn-red">
-                  <Tag size={18} /> Shop Closeout Deals
-                </Link>
-                <Link href="/kitchen-packages" className="btn-outline-white">
-                  Explore Kitchen Packages <ArrowRight size={18} />
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.heroCardWrap}>
-              <div className={styles.heroCard}>
-                <span className={styles.heroCardBadge}>Save $1,398</span>
-                <div className={styles.heroCardImage}>
-                  <Image
-                    src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
-                    alt="Samsung 4-Piece Kitchen Suite"
-                    fill
-                    priority
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <div className={styles.heroCardContent}>
-                  <h3>Samsung 4-Piece Stainless Suite</h3>
-                  <p>French Door Fridge + Gas Range + 48 dBA Dishwasher + OTR Microwave</p>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem' }}>
-                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff' }}>$2,498</span>
-                    <span style={{ fontSize: '0.95rem', color: '#94a3b8', textDecoration: 'line-through' }}>$3,896</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 1. DYNAMIC HERO BANNER (Managed from Admin Portal) */}
+      <HomeHeroSection />
 
       {/* 2. ONLY 6 APPROVED CATEGORY TILES (Matches User Specification) */}
       <section className={styles.section}>
