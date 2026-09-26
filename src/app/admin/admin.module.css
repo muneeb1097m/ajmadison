@@ -90,6 +90,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin-top: auto;
 }
 
 .viewStoreBtn {
@@ -99,6 +100,7 @@
   color: #94a3b8;
   font-size: 0.85rem;
   font-weight: 600;
+  transition: color 0.15s ease;
 }
 
 .viewStoreBtn:hover {
@@ -108,34 +110,21 @@
 .logoutBtn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #ef4444;
+  gap: 0.55rem;
+  color: #fca5a5;
   font-size: 0.85rem;
   font-weight: 600;
-  background: none;
-  cursor: pointer;
-  padding: 0.35rem 0;
-}
-
-.topLogoutBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  width: 100%;
-  padding: 0.42rem 0.75rem;
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   border-radius: 6px;
-  color: #fca5a5;
-  font-size: 0.78rem;
-  font-weight: 700;
   cursor: pointer;
+  padding: 0.5rem 0.85rem;
   transition: all 0.15s ease;
+  width: 100%;
 }
 
-.topLogoutBtn:hover {
-  background: rgba(239, 68, 68, 0.25);
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.22);
   border-color: #ef4444;
   color: #ffffff;
 }

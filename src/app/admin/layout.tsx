@@ -73,30 +73,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </div>
 
-        {/* User Card in Sidebar with Sign Out right at the top */}
-        <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
-              {adminUser.name ? adminUser.name.charAt(0).toUpperCase() : 'A'}
+        {/* User Card in Sidebar */}
+        <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+            {adminUser.name ? adminUser.name.charAt(0).toUpperCase() : 'A'}
+          </div>
+          <div style={{ overflow: 'hidden' }}>
+            <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'white', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+              {adminUser.name || 'Lead Administrator'}
             </div>
-            <div style={{ overflow: 'hidden' }}>
-              <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'white', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                {adminUser.name || 'Lead Administrator'}
-              </div>
-              <div style={{ fontSize: '0.72rem', color: '#94a3b8', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                {adminUser.email}
-              </div>
+            <div style={{ fontSize: '0.72rem', color: '#94a3b8', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+              {adminUser.email}
             </div>
           </div>
-
-          <button
-            onClick={handleLogout}
-            className={styles.topLogoutBtn}
-            title="Sign Out from Admin Portal"
-          >
-            <LogOut size={13} />
-            <span>Sign Out</span>
-          </button>
         </div>
 
         <nav className={styles.navSection}>
@@ -117,11 +106,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </nav>
 
+        {/* Bottom Left Footer Section */}
         <div className={styles.sidebarFooter}>
           <Link href="/" target="_blank" className={styles.viewStoreBtn}>
             <ExternalLink size={15} />
             <span className={styles.navLabel}>View Live Store</span>
           </Link>
+          <button
+            onClick={handleLogout}
+            className={styles.logoutBtn}
+            title="Sign Out from Admin Portal"
+          >
+            <LogOut size={15} />
+            <span className={styles.navLabel}>Sign Out</span>
+          </button>
         </div>
       </aside>
 
