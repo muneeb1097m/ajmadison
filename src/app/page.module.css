@@ -224,29 +224,29 @@
 }
 
 .categoryCircleWrap {
-  width: 96px;
-  height: 96px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #f3f4f6;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .categoryCircleItem:hover .categoryCircleWrap {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 22px -5px rgba(0, 0, 0, 0.16);
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.18);
 }
 
 .categoryCircleImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 50%;
   display: block;
 }
 
