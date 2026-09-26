@@ -32,100 +32,76 @@ export default function HomePage() {
       {/* 1. DYNAMIC HERO BANNER (Managed from Admin Portal) */}
       <HomeHeroSection />
 
-      {/* 2. ONLY 6 APPROVED CATEGORY TILES (Matches User Specification) */}
-      <section className={styles.section}>
+      {/* 2. SHOP BY CATEGORY (10 Circular Items Matching User Screenshot) */}
+      <section className={styles.categorySection}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <div>
-              <h2 className={styles.sectionTitle}>Shop By Department</h2>
-              <p className={styles.sectionSubtitle}>Select from our curated appliance collections</p>
-            </div>
-          </div>
+          <h2 className={styles.categorySectionTitle}>Shop By Category</h2>
 
-          <div className={styles.categoryGrid}>
-            {/* Closeout Deals */}
-            <Link href="/closeout-deals" className={`${styles.categoryTile} ${styles.categoryTileSpecial}`}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['closeout-deals'].heroImage}
-                  alt="Closeout Deals"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName} style={{ color: 'var(--accent-red)' }}>Closeout Deals</h3>
-              <span className={styles.tileSubtext}>Up to 50% Off</span>
-            </Link>
-
-            {/* Washers & Dryers */}
-            <Link href="/washers-dryers" className={styles.categoryTile}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['washers-dryers'].heroImage}
-                  alt="Washers & Dryers"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName}>Washers & Dryers</h3>
-              <span className={styles.tileSubtext}>Front & Top Load</span>
-            </Link>
-
-            {/* Dishwashers */}
-            <Link href="/dishwashers" className={styles.categoryTile}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['dishwashers'].heroImage}
-                  alt="Dishwashers"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName}>Dishwashers</h3>
-              <span className={styles.tileSubtext}>39-44 dBA Quiet</span>
-            </Link>
-
-            {/* Kitchen Packages */}
-            <Link href="/kitchen-packages" className={styles.categoryTile}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['kitchen-packages'].heroImage}
-                  alt="Kitchen Packages"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName}>Kitchen Packages</h3>
-              <span className={styles.tileSubtext}>Save up to $1,500</span>
-            </Link>
-
-            {/* Luxury Appliances */}
-            <Link href="/luxury-appliances" className={styles.categoryTile}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['luxury-appliances'].heroImage}
-                  alt="Luxury Appliances"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName}>Luxury Appliances</h3>
-              <span className={styles.tileSubtext}>Sub-Zero & Wolf</span>
-            </Link>
-
-            {/* Small Appliances */}
-            <Link href="/small-appliances" className={styles.categoryTile}>
-              <div className={styles.tileImageWrap}>
-                <Image
-                  src={CATEGORIES['small-appliances'].heroImage}
-                  alt="Small Appliances"
-                  fill
-                  className={styles.tileImage}
-                />
-              </div>
-              <h3 className={styles.tileName}>Small Appliances</h3>
-              <span className={styles.tileSubtext}>Countertop & Coffee</span>
-            </Link>
+          <div className={styles.categoryGridCircles}>
+            {[
+              {
+                name: 'Packages',
+                href: '/kitchen-packages',
+                image: '/images/categories/packages.png',
+              },
+              {
+                name: 'Washers & Dryers',
+                href: '/washers-dryers',
+                image: '/images/categories/washers_dryers.png',
+              },
+              {
+                name: 'Refrigerators',
+                href: '/kitchen-packages',
+                image: '/images/categories/refrigerators.png',
+              },
+              {
+                name: 'Cooking',
+                href: '/luxury-appliances',
+                image: '/images/categories/cooking.png',
+              },
+              {
+                name: 'Dishwashers',
+                href: '/dishwashers',
+                image: '/images/categories/dishwashers.png',
+              },
+              {
+                name: 'Outdoor',
+                href: '/luxury-appliances',
+                image: '/images/categories/outdoor.png',
+              },
+              {
+                name: 'Sinks & Faucets',
+                href: '/kitchen-packages',
+                image: '/images/categories/sinks_faucets.png',
+              },
+              {
+                name: 'AC & Air Quality',
+                href: '/small-appliances',
+                image: '/images/categories/ac_air_quality.png',
+              },
+              {
+                name: 'Smart Appliances',
+                href: '/kitchen-packages',
+                image: '/images/categories/smart_appliances.png',
+              },
+              {
+                name: 'Closeouts',
+                href: '/closeout-deals',
+                image: '/images/categories/closeouts.png',
+              },
+            ].map((cat, idx) => (
+              <Link key={idx} href={cat.href} className={styles.categoryCircleItem}>
+                <div className={styles.categoryCircleWrap}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className={styles.categoryCircleImg}
+                  />
+                </div>
+                <span className={styles.categoryCircleLabel}>{cat.name}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
