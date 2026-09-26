@@ -44,8 +44,8 @@
 }
 
 .triggerButtonOpen {
-  border-color: var(--primary-navy);
-  box-shadow: 0 0 0 3px rgba(26, 43, 109, 0.12);
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
 .triggerContent {
@@ -125,13 +125,13 @@
 }
 
 .dropdownItemActive {
-  background-color: #e0e7ff !important;
-  color: var(--primary-navy) !important;
+  background-color: #f4f4f5 !important;
+  color: #000000 !important;
   font-weight: 700;
 }
 
 .checkIcon {
-  color: var(--primary-navy);
+  color: #000000;
   flex-shrink: 0;
 }
 

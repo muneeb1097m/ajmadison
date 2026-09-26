@@ -29,11 +29,11 @@ export default function AdminForgotPasswordPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0d1740 0%, #1a2b6d 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #000000 0%, #111111 50%, #18181b 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
       <div style={{ background: '#ffffff', borderRadius: '16px', maxWidth: '440px', width: '100%', padding: '2.5rem 2rem', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{ width: '56px', height: '56px', background: '#e0e7ff', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
-            <Shield size={28} color="var(--primary-navy)" />
+          <div style={{ width: '56px', height: '56px', background: '#f4f4f5', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+            <Shield size={28} color="#000000" />
           </div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 800, color: 'var(--primary-navy)' }}>
             Reset Admin Password

@@ -1,0 +1,357 @@
+.heroWrapper {
+  background: #000000;
+  padding: 1.25rem 0 2rem;
+  width: 100%;
+}
+
+/* =========================================================================
+   1. TOP FLASH SALE STRIP
+   ========================================================================= */
+.flashBar {
+  background: #000000;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 2px;
+  padding: 0.45rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.flashLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.flashBadge {
+  color: #d2ec59;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.flashImageWrap {
+  position: relative;
+  height: 38px;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.flashImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.flashCenter {
+  color: #ffffff;
+  font-size: 0.88rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+  flex: 1;
+}
+
+.flashCenter strong {
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.flashRight {
+  flex-shrink: 0;
+}
+
+.flashButton {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.flashButton:hover {
+  color: #d2ec59;
+  text-decoration-color: #d2ec59;
+}
+
+/* =========================================================================
+   2. MAIN HERO BANNER (BLACK 3-COLUMN BOX)
+   ========================================================================= */
+.mainBanner {
+  background: #000000;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 2px;
+  padding: 2.25rem 2.5rem;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr 0.95fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ----------------- LEFT COLUMN: HEADING & DISCOUNT ----------------- */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.heading1 {
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 3.4vw, 3.3rem);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.heading2 {
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 3.4vw, 3.3rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #d2ec59;
+  line-height: 1.08;
+  margin: 0.15rem 0 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.discountBox {
+  display: inline-flex;
+  align-items: stretch;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.75rem;
+  border-radius: 0;
+}
+
+.upToLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  color: #000000;
+  padding: 0.4rem 0.35rem 0.4rem 0.65rem;
+  white-space: nowrap;
+}
+
+.discountVal {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.8rem, 4.2vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #000000;
+  padding: 0.35rem 0.95rem 0.35rem 0.35rem;
+  white-space: nowrap;
+}
+
+.ctaLink {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.ctaLink:hover {
+  color: #d2ec59;
+  text-decoration-color: #d2ec59;
+}
+
+/* ----------------- CENTER COLUMN: LIME MATTED PHOTO ----------------- */
+.centerCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.centerFrame {
+  background: #e2ed89;
+  padding: 6px 6px 0 6px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.centerImageWrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #1e1e1e;
+}
+
+.centerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.centerTag {
+  background: #e2ed89;
+  color: #000000;
+  text-align: center;
+  padding: 0.55rem 0.5rem 0.6rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* ----------------- RIGHT COLUMN: TIERED SAVINGS CARD ----------------- */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.tierCard {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.tierHeader {
+  background: #e2ed89;
+  color: #000000;
+  text-align: center;
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.tierBody {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.tierRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.6rem 0.95rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tierRow:last-child {
+  border-bottom: none;
+}
+
+.tierDiscount {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.5px;
+}
+
+.tierCondition {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  font-style: italic;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tierFootnote {
+  color: #94a3b8;
+  font-size: 0.62rem;
+  text-align: right;
+  margin-top: 0.35rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-right: 0.25rem;
+}
+
+/* =========================================================================
+   3. RESPONSIVE BREAKPOINTS
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .mainBanner {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem;
+  }
+
+  .rightCol {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .flashCenter {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .flashBar {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .flashLeft {
+    justify-content: center;
+  }
+
+  .mainBanner {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .leftCol {
+    align-items: center;
+  }
+
+  .centerCol {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .tierRow {
+    padding: 0.5rem 0.75rem;
+  }
+}

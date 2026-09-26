@@ -188,7 +188,7 @@ export default function AdminAuthPage() {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0d1740 0%, #1a2b6d 100%)',
+        background: 'linear-gradient(135deg, #000000 0%, #111111 50%, #18181b 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

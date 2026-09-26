@@ -8,7 +8,8 @@
 
 /* Top Announcement Banner */
 .announcementBanner {
-  background: linear-gradient(90deg, #0e1738 0%, #1a2b6d 50%, #0e1738 100%);
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
   font-size: 0.8rem;
   font-weight: 600;
@@ -22,7 +23,7 @@
 }
 
 .announcementBanner a {
-  color: #ffde59;
+  color: #d2ec59;
   text-decoration: underline;
   margin-left: 0.25rem;
 }
@@ -59,7 +60,7 @@
 }
 
 .utilityLink:hover {
-  color: var(--primary-navy);
+  color: #000000;
 }
 
 .utilityRight {
@@ -69,7 +70,7 @@
 }
 
 .proBadge {
-  background: linear-gradient(135deg, #1a2b6d, #2563eb);
+  background: #000000;
   color: white;
   padding: 0.15rem 0.45rem;
   border-radius: 4px;

@@ -44,7 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   if (!mounted) {
-    return <div style={{ minHeight: '100vh', background: '#0d1740' }} />;
+    return <div style={{ minHeight: '100vh', background: '#09090b' }} />;
   }
 
   // If on login or forgot-password, render only the auth card
@@ -55,8 +55,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // If not logged in, prevent rendering protected admin dashboard
   if (!adminUser) {
     return (
-      <div style={{ minHeight: '100vh', background: '#0d1740', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexDirection: 'column', gap: '1rem' }}>
-        <Shield size={36} color="#ffde59" />
+      <div style={{ minHeight: '100vh', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexDirection: 'column', gap: '1rem' }}>
+        <Shield size={36} color="#d2ec59" />
         <div style={{ fontSize: '1rem', fontWeight: 600 }}>Verifying Admin Credentials...</div>
       </div>
     );
@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Admin Sidebar */}
       <aside className={styles.adminSidebar}>
         <div className={styles.sidebarHeader}>
-          <Shield size={24} color="#ffde59" />
+          <Shield size={24} color="#d2ec59" />
           <div className={styles.sidebarBrandText}>
             <div className={styles.sidebarBrand}>ajmadison</div>
             <span className={styles.adminBadge}>Admin Portal</span>
@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* User Card in Sidebar */}
         <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+          <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#d92525', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
             {adminUser.name ? adminUser.name.charAt(0).toUpperCase() : 'A'}
           </div>
           <div style={{ overflow: 'hidden' }}>

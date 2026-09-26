@@ -239,12 +239,12 @@ export default function ProductDetailClient({ product }: Props) {
             </p>
 
             {/* Call Expert CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.85rem', background: '#eff6ff', borderRadius: '8px', border: '1px solid #bfdbfe' }}>
-              <Phone size={20} color="var(--primary-navy)" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.85rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-medium)' }}>
+              <Phone size={20} color="#000000" />
               <div style={{ fontSize: '0.86rem' }}>
                 Questions about cabinet cutouts or custom panels?
                 <br />
-                <a href="tel:8005703355" style={{ color: 'var(--primary-navy)', fontWeight: 700 }}>
+                <a href="tel:8005703355" style={{ color: '#000000', fontWeight: 700 }}>
                   Speak to an AJ Madison Specialist at 800-570-3355
                 </a>
               </div>

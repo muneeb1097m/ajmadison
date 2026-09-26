@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Tag, ArrowRight, Sparkles } from 'lucide-react';
-import styles from '@/app/page.module.css';
+import { ArrowRight } from 'lucide-react';
+import styles from './HomeHeroSection.module.css';
 import { HeroSettings, DEFAULT_HERO_SETTINGS } from '@/data/heroSettings';
 
 export default function HomeHeroSection() {
@@ -14,7 +13,8 @@ export default function HomeHeroSection() {
     try {
       const stored = localStorage.getItem('ajm_hero_settings');
       if (stored) {
-        setSettings(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        setSettings({ ...DEFAULT_HERO_SETTINGS, ...parsed });
       }
     } catch {
       // use default
@@ -23,7 +23,8 @@ export default function HomeHeroSection() {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'ajm_hero_settings' && e.newValue) {
         try {
-          setSettings(JSON.parse(e.newValue));
+          const parsed = JSON.parse(e.newValue);
+          setSettings({ ...DEFAULT_HERO_SETTINGS, ...parsed });
         } catch {
           // ignore
         }
@@ -34,58 +35,116 @@ export default function HomeHeroSection() {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
+  const tiers = settings.tiers && settings.tiers.length > 0
+    ? settings.tiers
+    : DEFAULT_HERO_SETTINGS.tiers;
+
   return (
-    <section className={styles.heroSection}>
+    <section className={styles.heroWrapper}>
       <div className="container">
-        <div className={styles.heroGrid}>
-          <div>
-            <div className={styles.heroTagline}>
-              <Sparkles size={14} /> {settings.tagline}
+        {/* 1. TOP FLASH SALE STRIP */}
+        {settings.flashSaleActive !== false && (
+          <div className={styles.flashBar}>
+            <div className={styles.flashLeft}>
+              <span className={styles.flashBadge}>
+                {settings.flashSaleBadge || 'FLASH SALE'}
+              </span>
+              <div className={styles.flashImageWrap}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={settings.flashSaleImage || '/images/hero_flash_appliances.png'}
+                  alt="Flash Sale Appliances"
+                  className={styles.flashImage}
+                />
+              </div>
             </div>
-            <h1 className={styles.heroHeading}>
-              {settings.headingPrefix} <span>{settings.headingHighlight}</span> {settings.headingSuffix}
-            </h1>
-            <p className={styles.heroDescription}>
-              {settings.description}
-            </p>
-            <div className={styles.heroButtons}>
-              <Link href={settings.primaryButtonLink} className="btn-red">
-                <Tag size={18} /> {settings.primaryButtonText}
-              </Link>
-              <Link href={settings.secondaryButtonLink} className="btn-outline-white">
-                {settings.secondaryButtonText} <ArrowRight size={18} />
+
+            <div className={styles.flashCenter}>
+              {settings.flashSaleText ? (
+                <span>{settings.flashSaleText}</span>
+              ) : (
+                <>
+                  EXCLUSIVE <strong>LIMITED-TIME DEALS</strong> ONLY AT AJM
+                </>
+              )}
+            </div>
+
+            <div className={styles.flashRight}>
+              <Link
+                href={settings.flashSaleButtonLink || '/closeout-deals'}
+                className={styles.flashButton}
+              >
+                {settings.flashSaleButtonText || 'SHOP NOW'}
               </Link>
             </div>
           </div>
+        )}
 
-          <div className={styles.heroCardWrap}>
-            <div className={styles.heroCard}>
-              {settings.cardBadge && (
-                <span className={styles.heroCardBadge}>{settings.cardBadge}</span>
-              )}
-              <div className={styles.heroCardImage}>
-                {/* Support both remote URLs and local data-urls */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={settings.cardImage}
-                  alt={settings.cardTitle}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+        {/* 2. MAIN HERO BANNER (3-COLUMN EXACT RECREATION) */}
+        <div className={styles.mainBanner}>
+          {/* COLUMN 1: NEW SEASON / FRESH SAVINGS / UP TO 50% OFF */}
+          <div className={styles.leftCol}>
+            <h1 className={styles.heading1}>
+              {settings.headingLine1 || 'New Season.'}
+            </h1>
+            <h2 className={styles.heading2}>
+              {settings.headingLine2 || 'Fresh Savings.'}
+            </h2>
+
+            <div className={styles.discountBox}>
+              <div className={styles.upToLabel}>
+                {settings.discountPrefix || 'UP TO'}
               </div>
-              <div className={styles.heroCardContent}>
-                <h3>{settings.cardTitle}</h3>
-                <p>{settings.cardDescription}</p>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem' }}>
-                  <span style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff' }}>
-                    ${Number(settings.cardPrice || 0).toLocaleString()}
-                  </span>
-                  {settings.cardOriginalPrice > settings.cardPrice && (
-                    <span style={{ fontSize: '0.95rem', color: '#94a3b8', textDecoration: 'line-through' }}>
-                      ${Number(settings.cardOriginalPrice).toLocaleString()}
-                    </span>
-                  )}
+              <div className={styles.discountVal}>
+                {settings.discountValue || '50% OFF'}
+              </div>
+            </div>
+
+            <Link
+              href={settings.ctaLink || '/closeout-deals'}
+              className={styles.ctaLink}
+            >
+              {settings.ctaText || 'SHOP ALL DEALS NOW →'}
+            </Link>
+          </div>
+
+          {/* COLUMN 2: CENTER ARCH KITCHEN PHOTO WITH LIME FRAME */}
+          <div className={styles.centerCol}>
+            <Link href={settings.centerLink || '/kitchen-packages'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className={styles.centerFrame}>
+                <div className={styles.centerImageWrap}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={settings.centerImage || '/images/hero_center_kitchen.png'}
+                    alt="Designer Picks Best-Sellers"
+                    className={styles.centerImage}
+                  />
+                </div>
+                <div className={styles.centerTag}>
+                  {settings.centerImageTag || "DESIGNER PICKS, BEST-SELLERS & WHAT'S NEW"}
                 </div>
               </div>
+            </Link>
+          </div>
+
+          {/* COLUMN 3: THE MORE YOU BUY, THE MORE YOU SAVE TIER CARD */}
+          <div className={styles.rightCol}>
+            <div className={styles.tierCard}>
+              <div className={styles.tierHeader}>
+                <div>{settings.tierHeaderLine1 || 'THE MORE YOU BUY,'}</div>
+                <div>{settings.tierHeaderLine2 || 'THE MORE YOU SAVE™'}</div>
+              </div>
+              <div className={styles.tierBody}>
+                {tiers.map((t, idx) => (
+                  <div key={idx} className={styles.tierRow}>
+                    <span className={styles.tierDiscount}>{t.discount}</span>
+                    <span className={styles.tierCondition}>{t.condition}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.tierFootnote}>
+              {settings.tierFootnote || '*ON QUALIFYING ITEMS'}
             </div>
           </div>
         </div>

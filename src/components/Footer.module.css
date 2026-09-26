@@ -1,14 +1,15 @@
 .footer {
-  background-color: #0d1740;
+  background-color: #000000;
   color: #d1d5db;
   font-size: 0.9rem;
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Value Props Strip */
 .valuePropsStrip {
-  background-color: #152259;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0a0a0a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2.25rem 0;
 }
 

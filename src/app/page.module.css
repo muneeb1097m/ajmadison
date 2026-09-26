@@ -1,6 +1,6 @@
 .heroSection {
   position: relative;
-  background: linear-gradient(135deg, #0e1738 0%, #1a2b6d 60%, #1e3a8a 100%);
+  background: #000000;
   color: #ffffff;
   padding: 4rem 0 4.5rem;
   overflow: hidden;
@@ -269,7 +269,7 @@
 
 /* Promo Banner Mid-Page */
 .promoBanner {
-  background: linear-gradient(135deg, #1e3a8a, #0d1740);
+  background: linear-gradient(135deg, #18181b 0%, #09090b 60%, #000000 100%);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   color: white;
@@ -278,7 +278,8 @@
   align-items: center;
   gap: 2.5rem;
   margin: 3.5rem 0;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 860px) {
@@ -339,12 +340,12 @@
 }
 
 .brandPill:hover {
-  color: var(--primary-navy);
+  color: #000000;
 }
 
 /* Mid-Page Banner Variants */
 .bannerRebate {
-  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 40%, #1e1b4b 100%);
+  background: linear-gradient(135deg, #18181b 0%, #0a0a0a 50%, #000000 100%);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   color: white;
@@ -353,12 +354,12 @@
   align-items: center;
   gap: 2.5rem;
   margin: 3.5rem 0;
-  box-shadow: 0 20px 40px -10px rgba(127, 29, 29, 0.35);
-  border: 1px solid rgba(254, 202, 202, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .bannerDelivery {
-  background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #0d1740 100%);
+  background: linear-gradient(135deg, #18181b 0%, #0f0f11 50%, #000000 100%);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   color: white;
@@ -367,12 +368,12 @@
   align-items: center;
   gap: 2.5rem;
   margin: 3.5rem 0;
-  box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.35);
-  border: 1px solid rgba(167, 243, 208, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .bannerTrade {
-  background: linear-gradient(135deg, #090d16 0%, #172033 50%, #1e293b 100%);
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #000000 100%);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   color: white;
@@ -381,12 +382,12 @@
   align-items: center;
   gap: 2.5rem;
   margin: 3.5rem 0;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .bannerQuiet {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 60%, #1e3a8a 100%);
+  background: linear-gradient(135deg, #18181b 0%, #121214 50%, #000000 100%);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   color: white;
@@ -395,8 +396,8 @@
   align-items: center;
   gap: 2.5rem;
   margin: 3.5rem 0;
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 860px) {

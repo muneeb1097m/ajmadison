@@ -8,7 +8,7 @@
 /* Sidebar */
 .adminSidebar {
   width: 260px;
-  background-color: #0d1740;
+  background-color: #09090b;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -578,7 +578,7 @@
   position: absolute;
   top: 6px;
   right: 6px;
-  background: #2563eb;
+  background: #000000;
   color: #ffffff;
   font-size: 0.65rem;
   font-weight: 800;

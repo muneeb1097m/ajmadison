@@ -1,9 +1,10 @@
 .categoryHero {
   position: relative;
-  background: linear-gradient(135deg, #0e1738 0%, #1a2b6d 60%, #172554 100%);
+  background: linear-gradient(135deg, #000000 0%, #18181b 60%, #09090b 100%);
   color: white;
   padding: 3rem 0;
   margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .heroContent {

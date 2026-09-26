@@ -52,7 +52,7 @@ export default function JoinProPage() {
         </div>
 
         {/* Registration Card */}
-        <div style={{ background: 'linear-gradient(135deg, #0e1738, #1a2b6d)', color: 'white', padding: '2.5rem', borderRadius: '16px', textAlign: 'center' }}>
+        <div style={{ background: 'linear-gradient(135deg, #000000 0%, #18181b 100%)', color: 'white', padding: '2.5rem', borderRadius: '16px', textAlign: 'center', border: '1px solid rgba(255, 255, 255, 0.15)' }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.75rem' }}>
             Apply for Your AJ Madison Pro Account
           </h2>
