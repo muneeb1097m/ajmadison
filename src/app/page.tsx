@@ -9,6 +9,9 @@ import {
   Sparkles,
   Percent,
   CheckCircle,
+  Phone,
+  Volume2,
+  Award,
 } from 'lucide-react';
 import styles from './page.module.css';
 import ProductCard from '@/components/ProductCard';
@@ -153,6 +156,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BANNER 1: MANUFACTURER REBATES & BUNDLE CASHBACK */}
+      <div className="container">
+        <div className={styles.bannerRebate}>
+          <div>
+            <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
+              <Percent size={13} style={{ marginRight: '4px' }} /> Mail-In Factory Rebates
+            </span>
+            <h2 className={styles.promoTitle}>Save Up To $2,000 On Complete Kitchen Packages</h2>
+            <p className={styles.promoText}>
+              Combine qualifying luxury refrigerators, professional ranges, wall ovens, and dishwashers from Bosch, Thermador, Samsung, and LG for maximum factory cash-back savings.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/kitchen-packages" className="btn-red">
+                Explore Bundle Rebates <ArrowRight size={16} />
+              </Link>
+              <a href="tel:8005703355" className="btn-outline-white">
+                <Phone size={15} /> Call For Package Quote
+              </a>
+            </div>
+          </div>
+          <div className={styles.promoImageWrap}>
+            <Image
+              src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
+              alt="Kitchen Package Rebates"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* 4. KITCHEN PACKAGES SUITES */}
       <section className={styles.section}>
         <div className="container">
@@ -233,6 +267,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BANNER 3: NATIONWIDE WHITE-GLOVE IN-HOME DELIVERY */}
+      <div className="container">
+        <div className={styles.bannerDelivery}>
+          <div>
+            <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
+              <Truck size={13} style={{ marginRight: '4px' }} /> In-Home Delivery & Connection
+            </span>
+            <h2 className={styles.promoTitle}>Nationwide White-Glove In-Home Delivery & Haul-Away</h2>
+            <p className={styles.promoText}>
+              Our certified appliance delivery specialists bring your laundry machines and kitchen suites directly into your room of choice, unbox, level, test connection lines, and haul away old units.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/washers-dryers" className="btn-red">
+                Reserve Delivery Schedule <ArrowRight size={16} />
+              </Link>
+              <a href="tel:8005703355" className="btn-outline-white">
+                <ShieldCheck size={15} /> Delivery Guarantee
+              </a>
+            </div>
+          </div>
+          <div className={styles.promoImageWrap}>
+            <Image
+              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+              alt="White-Glove Delivery Specialist"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* 7. DISHWASHERS SECTION */}
       <section className={styles.section}>
         <div className="container">
@@ -255,6 +320,37 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* BANNER 4: WHISPER-QUIET 38-42 dBA GUARANTEE */}
+      <div className="container">
+        <div className={styles.bannerQuiet}>
+          <div>
+            <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
+              <Volume2 size={13} style={{ marginRight: '4px' }} /> Library-Quiet Certified
+            </span>
+            <h2 className={styles.promoTitle}>Undisturbed Home Living: Ultra-Quiet 38–42 dBA Dishwashers</h2>
+            <p className={styles.promoText}>
+              Engineered with multi-stage sound absorption, EcoSilence drive motors, and patented CrystalDry technology. Run full sanitizing cycles without hearing a whisper in open living spaces.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/dishwashers" className="btn-red">
+                Shop Quiet Dishwashers <ArrowRight size={16} />
+              </Link>
+              <Link href="/dishwashers/panel-ready" className="btn-outline-white">
+                Explore Panel-Ready Suites
+              </Link>
+            </div>
+          </div>
+          <div className={styles.promoImageWrap}>
+            <Image
+              src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=800&q=80"
+              alt="Ultra Quiet Kitchen Dishwasher"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* 8. LUXURY APPLIANCES */}
       <section className={`${styles.section} ${styles.sectionAlt}`}>
@@ -281,6 +377,37 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* BANNER 5: TRADE & ARCHITECTURAL CONSULTATION */}
+      <div className="container">
+        <div className={styles.bannerTrade}>
+          <div>
+            <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
+              <Award size={13} style={{ marginRight: '4px' }} /> Trade & Architectural Division
+            </span>
+            <h2 className={styles.promoTitle}>Designing a Luxury Estate? Partner with AJ Madison Pro</h2>
+            <p className={styles.promoText}>
+              Architects, interior designers, and general contractors receive trade pricing, dedicated spec coordination, technical cutout blueprints, and nationwide priority delivery.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="tel:8005703355" className="btn-red">
+                <Phone size={15} /> Call Trade Concierge: 800-570-3355
+              </a>
+              <Link href="/luxury-appliances" className="btn-outline-white">
+                View Luxury Suites <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+          <div className={styles.promoImageWrap}>
+            <Image
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+              alt="Luxury Kitchen Design Architecture"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* 9. SMALL APPLIANCES */}
       <section className={styles.section}>

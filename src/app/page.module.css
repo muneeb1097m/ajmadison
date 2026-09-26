@@ -341,3 +341,71 @@
 .brandPill:hover {
   color: var(--primary-navy);
 }
+
+/* Mid-Page Banner Variants */
+.bannerRebate {
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 40%, #1e1b4b 100%);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+  box-shadow: 0 20px 40px -10px rgba(127, 29, 29, 0.35);
+  border: 1px solid rgba(254, 202, 202, 0.2);
+}
+
+.bannerDelivery {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #0d1740 100%);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+  box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.35);
+  border: 1px solid rgba(167, 243, 208, 0.2);
+}
+
+.bannerTrade {
+  background: linear-gradient(135deg, #090d16 0%, #172033 50%, #1e293b 100%);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bannerQuiet {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 60%, #1e3a8a 100%);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+@media (max-width: 860px) {
+  .bannerRebate,
+  .bannerDelivery,
+  .bannerTrade,
+  .bannerQuiet {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+}
