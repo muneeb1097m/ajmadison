@@ -1,51 +1,51 @@
 import React from 'react';
 import Link from 'next/link';
-import { Truck, ShieldCheck, Headphones, CreditCard, Phone, MapPin } from 'lucide-react';
+import { Truck, ShieldCheck, Headphones, CreditCard, Phone } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      {/* 1. Value Props Banner */}
+      {/* 1. Value Props Strip (Minimal & Understated) */}
       <div className={styles.valuePropsStrip}>
         <div className="container">
           <div className={styles.valuePropsGrid}>
             <div className={styles.propItem}>
-              <Truck size={28} className={styles.propIcon} />
+              <Truck size={20} strokeWidth={1.75} className={styles.propIcon} />
               <div>
                 <div className={styles.propTitle}>Nationwide Delivery</div>
                 <div className={styles.propDesc}>
-                  Free curbside & threshold delivery on appliance orders over $999.
+                  Complimentary threshold delivery on qualifying suites.
                 </div>
               </div>
             </div>
 
             <div className={styles.propItem}>
-              <ShieldCheck size={28} className={styles.propIcon} />
+              <ShieldCheck size={20} strokeWidth={1.75} className={styles.propIcon} />
               <div>
                 <div className={styles.propTitle}>Factory Authorized</div>
                 <div className={styles.propDesc}>
-                  100% genuine products with manufacturer warranties & rebates.
+                  Direct manufacturer warranties, rebates & verified parts.
                 </div>
               </div>
             </div>
 
             <div className={styles.propItem}>
-              <Headphones size={28} className={styles.propIcon} />
+              <Headphones size={20} strokeWidth={1.75} className={styles.propIcon} />
               <div>
                 <div className={styles.propTitle}>Appliance Specialists</div>
                 <div className={styles.propDesc}>
-                  Certified product consultants ready to assist with sizing & installation.
+                  Expert guidance on custom cabinetry cutouts & sizing.
                 </div>
               </div>
             </div>
 
             <div className={styles.propItem}>
-              <CreditCard size={28} className={styles.propIcon} />
+              <CreditCard size={20} strokeWidth={1.75} className={styles.propIcon} />
               <div>
                 <div className={styles.propTitle}>Special Financing</div>
                 <div className={styles.propDesc}>
-                  0% APR financing available for up to 24 months with approved credit.
+                  Flexible payment plans with approved credit.
                 </div>
               </div>
             </div>
@@ -53,35 +53,34 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 2. Main Footer Content */}
+      {/* 2. Main Footer Content (Minimal 4 Columns) */}
       <div className={styles.mainFooter}>
         <div className="container">
           <div className={styles.footerGrid}>
-            {/* Column 1: Brand Info & Call */}
+            {/* Column 1: Brand & Direct Concierge */}
             <div className={styles.brandCol}>
               <div className={styles.footerLogo}>
                 ajmadison<span className={styles.footerLogoAccent}>.</span>
               </div>
-              <div className={styles.brandTagline}>The Appliance Authority Since 2001</div>
+              <div className={styles.brandTagline}>The Appliance Authority · Est. 2001</div>
               <p className={styles.brandBio}>
-                Your premier destination for high-end kitchen packages, ultra-quiet dishwashers, commercial laundry systems, and luxury home appliances.
+                Your premier destination for high-end kitchen packages, ultra-quiet dishwashers, and luxury architectural suites.
               </p>
-              <div className={styles.phoneCard}>
-                <Phone size={18} color="#ffde59" />
-                <div>
-                  <span style={{ fontSize: '0.75rem', display: 'block', color: '#9ca3af' }}>Need Expert Help?</span>
-                  <a href="tel:8005703355">800-570-3355</a>
-                </div>
+              <div className={styles.minimalContact}>
+                <span className={styles.contactLabel}>Need Expert Guidance?</span>
+                <a href="tel:8005703355" className={styles.contactPhone}>
+                  <Phone size={13} strokeWidth={2} /> 800-570-3355
+                </a>
               </div>
             </div>
 
-            {/* Column 2: Exclusive Categories (Only the user-requested ones) */}
+            {/* Column 2: Departments */}
             <div>
-              <h4 className={styles.footerHeading}>Shop Departments</h4>
+              <h4 className={styles.footerHeading}>Departments</h4>
               <ul className={styles.footerLinks}>
                 <li>
-                  <Link href="/closeout-deals" style={{ color: '#ef4444', fontWeight: 600 }}>
-                    🔥 Closeout Deals
+                  <Link href="/closeout-deals" className={styles.closeoutLink}>
+                    Closeout Deals
                   </Link>
                 </li>
                 <li>
@@ -102,54 +101,48 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 3: Showrooms & Services */}
+            {/* Column 3: Showrooms & Trade */}
             <div>
-              <h4 className={styles.footerHeading}>Showrooms & Design</h4>
+              <h4 className={styles.footerHeading}>Showrooms</h4>
               <ul className={styles.footerLinks}>
-                <li>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={12} color="#ffde59" /> Brooklyn Flagship (3605 13th Ave)
-                  </span>
+                <li className={styles.showroomItem}>
+                  <span className={styles.showroomCity}>Brooklyn Flagship</span>
+                  <span className={styles.showroomAddress}>3605 13th Ave</span>
                 </li>
-                <li>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={12} color="#ffde59" /> Washington D.C. Showroom
-                  </span>
+                <li className={styles.showroomItem}>
+                  <span className={styles.showroomCity}>Washington D.C.</span>
+                  <span className={styles.showroomAddress}>Tysons Corner, VA</span>
                 </li>
-                <li>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={12} color="#ffde59" /> Tysons Corner, VA
-                  </span>
+                <li className={styles.showroomItem}>
+                  <span className={styles.showroomCity}>Miami Design District</span>
+                  <span className={styles.showroomAddress}>Florida Showroom</span>
                 </li>
-                <li>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={12} color="#ffde59" /> Miami Design District, FL
-                  </span>
-                </li>
-                <li>
-                  <Link href="/join-pro">Trade & Contractor Program</Link>
+                <li style={{ marginTop: '0.4rem' }}>
+                  <Link href="/join-pro" style={{ color: '#d4d4d8', fontWeight: 600 }}>
+                    Trade & Contract Pro
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 4: Customer Care */}
+            {/* Column 4: Client Care */}
             <div>
-              <h4 className={styles.footerHeading}>Customer Care</h4>
+              <h4 className={styles.footerHeading}>Client Care</h4>
               <ul className={styles.footerLinks}>
                 <li>
-                  <Link href="/order-status">Track Order Status</Link>
+                  <Link href="/order-status">Track Reservation</Link>
                 </li>
                 <li>
-                  <Link href="/closeout-deals">Flash Rebates & Deals</Link>
+                  <Link href="/kitchen-packages">Factory Rebates</Link>
                 </li>
                 <li>
-                  <Link href="/washers-dryers">Laundry Sizing Guides</Link>
+                  <Link href="/luxury-appliances">Design Consultations</Link>
                 </li>
                 <li>
-                  <Link href="/dishwashers">Dishwasher Decibel Chart</Link>
+                  <Link href="/dishwashers">Library-Quiet Specs</Link>
                 </li>
                 <li>
-                  <Link href="/kitchen-packages">Kitchen Builder Suite</Link>
+                  <a href="tel:8005703355">Delivery & White-Glove FAQs</a>
                 </li>
               </ul>
             </div>
@@ -157,12 +150,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 3. Bottom Bar */}
+      {/* 3. Bottom Minimal Copyright Bar */}
       <div className={styles.bottomBar}>
         <div className="container">
-          <div className={styles.bottomInner} style={{ justifyContent: 'center', textAlign: 'center' }}>
+          <div className={styles.bottomInner}>
             <div>
-              © {new Date().getFullYear()} AJ Madison Inc. All Rights Reserved. Built with Next.js.
+              © {new Date().getFullYear()} AJ Madison Inc. All Rights Reserved.
+            </div>
+            <div className={styles.bottomLinks}>
+              <Link href="/order-status">Reservation Status</Link>
+              <span>·</span>
+              <Link href="/join-pro">Trade Division</Link>
+              <span>·</span>
+              <Link href="/closeout-deals">Clearance</Link>
             </div>
           </div>
         </div>
