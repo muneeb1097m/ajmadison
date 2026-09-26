@@ -160,17 +160,9 @@ export default function Footer() {
       {/* 3. Bottom Bar */}
       <div className={styles.bottomBar}>
         <div className="container">
-          <div className={styles.bottomInner}>
+          <div className={styles.bottomInner} style={{ justifyContent: 'center', textAlign: 'center' }}>
             <div>
               © {new Date().getFullYear()} AJ Madison Inc. All Rights Reserved. Built with Next.js.
-            </div>
-            <div className={styles.paymentBadges}>
-              <span className={styles.paymentPill}>Visa</span>
-              <span className={styles.paymentPill}>Mastercard</span>
-              <span className={styles.paymentPill}>Amex</span>
-              <span className={styles.paymentPill}>Discover</span>
-              <span className={styles.paymentPill}>Affirm 0% APR</span>
-              <span className={styles.paymentPill}>PayPal</span>
             </div>
           </div>
         </div>
