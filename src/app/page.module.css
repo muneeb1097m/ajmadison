@@ -194,24 +194,26 @@
   margin: 0 auto;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 860px) {
+  .categorySection {
+    padding: 2rem 0 1.25rem;
+  }
+  .categorySectionTitle {
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+  }
   .categoryGridCircles {
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem 0.75rem;
-  }
-}
-
-@media (max-width: 720px) {
-  .categoryGridCircles {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem 0.75rem;
-  }
-}
-
-@media (max-width: 460px) {
-  .categoryGridCircles {
-    grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem 0.5rem;
+  }
+  .categoryCircleWrap {
+    width: clamp(52px, 14vw, 76px);
+    height: clamp(52px, 14vw, 76px);
+  }
+  .categoryCircleLabel {
+    font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+    margin-top: 0.45rem;
+    line-height: 1.18;
   }
 }
 

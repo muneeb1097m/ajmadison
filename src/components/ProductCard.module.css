@@ -1,8 +1,8 @@
 .card {
   background: #ffffff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.25rem 1rem 1.15rem;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -10,219 +10,267 @@
   height: 100%;
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-navy);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
 }
 
-.badgeRow {
-  position: absolute;
-  top: 0.85rem;
-  left: 0.85rem;
-  right: 0.85rem;
+/* 1. Header: Left Badge + Right Brand Badge */
+.cardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  z-index: 2;
-  pointer-events: none;
+  align-items: center;
+  min-height: 22px;
+  margin-bottom: 0.75rem;
 }
 
+.badgeWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.brandWrap {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Brand Badges */
+.mieleBadge {
+  background: #a60a23;
+  color: #ffffff;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-style: italic;
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  box-shadow: 0 1px 2px rgba(166, 10, 35, 0.2);
+}
+
+.boschBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #d92525;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.boschIcon {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.samsungBadge {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #034ea2;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.lgBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #a50034;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.lgDot {
+  font-size: 0.65rem;
+}
+
+.thermadorBadge {
+  font-family: var(--font-display), serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.defaultBrandBadge {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* 2. Product Image Canvas (Clean & Centered on pure white) */
 .imageContainer {
   position: relative;
   width: 100%;
-  padding-top: 85%;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  background-color: #fafbfc;
-  margin-bottom: 1rem;
+  height: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  background: #ffffff;
 }
 
 .productImage {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 0.75rem;
   transition: transform 0.3s ease;
 }
 
 .card:hover .productImage {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-.metaRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.35rem;
-}
-
-.brand {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--primary-navy);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.modelNumber {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-family: monospace;
+/* 3. Product Title (2-line clamp) */
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .title {
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--text-main);
+  color: #1f2937;
   line-height: 1.35;
-  margin-bottom: 0.5rem;
+  height: 2.45rem;
+  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
-  height: 2.7rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.15s ease;
 }
 
 .title:hover {
-  color: var(--primary-navy);
+  color: #000000;
 }
 
+/* 4. Star Rating Row */
 .ratingRow {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  gap: 0.35rem;
+  min-height: 16px;
+  margin-bottom: 0.55rem;
+  font-size: 0.75rem;
+  color: #6b7280;
 }
 
 .stars {
   display: flex;
   align-items: center;
   gap: 2px;
-  color: #f59e0b;
 }
 
-.specsList {
-  list-style: none;
-  background-color: #f8fafc;
-  padding: 0.5rem 0.65rem;
-  border-radius: var(--radius-sm);
-  margin-bottom: 0.85rem;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.reviewCount {
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-.specsItem {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+.emptyRatingSpace {
+  min-height: 16px;
 }
 
-.pricingSection {
-  margin-top: auto;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-light);
-}
-
+/* 5. Pricing Row */
 .priceRow {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  margin-bottom: 0.25rem;
+  gap: 0.45rem;
+  margin-bottom: 1.15rem;
 }
 
 .currentPrice {
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #111827;
+  letter-spacing: -0.02em;
 }
 
 .originalPrice {
-  font-size: 0.9rem;
-  color: var(--text-light);
+  font-size: 0.8rem;
+  color: #9ca3af;
   text-decoration: line-through;
 }
 
-.financingNote {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-}
-
-.rebateTag {
-  display: inline-block;
-  font-size: 0.75rem;
-  color: var(--accent-red);
-  font-weight: 600;
-  margin-bottom: 0.6rem;
-}
-
-.stockBadge {
+/* 6. Bottom Action: Minimal Plus Link Button */
+.bottomAction {
+  margin-top: auto;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--green-stock);
-  margin-bottom: 0.85rem;
-}
-
-.actionButtons {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
 }
 
 .addToCartBtn {
-  width: 100%;
-  background-color: var(--primary-navy);
-  color: white;
-  padding: 0.65rem;
-  border-radius: var(--radius-md);
-  font-size: 0.88rem;
-  font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  transition: all var(--transition-fast);
+  background: transparent;
+  color: #242971;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 0.5rem;
+  cursor: pointer;
+  border: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+  width: auto;
 }
 
 .addToCartBtn:hover {
-  background-color: var(--primary-navy-dark);
+  color: #d92525;
+  transform: translateY(-1px);
 }
 
-.viewDetailsBtn {
-  width: 100%;
-  background-color: #ffffff;
-  color: var(--primary-navy);
-  border: 1px solid var(--border-medium);
-  padding: 0.55rem;
-  border-radius: var(--radius-md);
-  font-size: 0.82rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  transition: all var(--transition-fast);
+.plusIcon {
+  color: inherit;
+  flex-shrink: 0;
 }
 
-.viewDetailsBtn:hover {
-  background-color: #f8fafc;
-  border-color: var(--primary-navy);
+/* =========================================================================
+   Mobile Responsiveness
+   ========================================================================= */
+@media (max-width: 640px) {
+  .card {
+    padding: 0.95rem 0.75rem 0.85rem;
+  }
+
+  .imageContainer {
+    height: 140px;
+    margin-bottom: 0.65rem;
+  }
+
+  .title {
+    font-size: 0.78rem;
+    height: 2.3rem;
+  }
+
+  .currentPrice {
+    font-size: 1.05rem;
+  }
+
+  .addToCartBtn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.4rem;
+  }
 }
