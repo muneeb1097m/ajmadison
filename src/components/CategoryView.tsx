@@ -128,28 +128,6 @@ export default function CategoryView({
         </div>
       </section>
 
-      {/* 2. Subcategory Quick Filter Pills */}
-      <div className={styles.subcategoriesBar}>
-        <div className="container">
-          <div className={styles.subcategoriesList}>
-            <button
-              className={`${styles.subPill} ${selectedSubcategory === 'all' ? styles.subPillActive : ''}`}
-              onClick={() => setSelectedSubcategory('all')}
-            >
-              All {category.name} ({products.length})
-            </button>
-            {category.subcategories.map((sub) => (
-              <button
-                key={sub.slug}
-                className={`${styles.subPill} ${selectedSubcategory === sub.slug ? styles.subPillActive : ''}`}
-                onClick={() => setSelectedSubcategory(sub.slug)}
-              >
-                {sub.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* 3. Catalog Main Layout */}
       <div className="container">
