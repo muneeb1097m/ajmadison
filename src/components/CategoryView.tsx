@@ -45,6 +45,7 @@ export default function CategoryView({
       if (selectedSubcategory !== 'all') {
         const matchesSubcategory =
           product.subCategorySlug === selectedSubcategory ||
+          (product.subCategories && product.subCategories.includes(selectedSubcategory)) ||
           (category.slug === 'closeout-deals' && product.category === selectedSubcategory);
         if (!matchesSubcategory) return false;
       }
@@ -155,6 +156,28 @@ export default function CategoryView({
         <div className={styles.catalogLayout}>
           {/* Filters Sidebar */}
           <aside className={styles.sidebar}>
+            {/* Category Navigation (Matches User Screenshot) */}
+            {category.subcategories && category.subcategories.length > 0 && (
+              <div className={styles.sidebarCategoryNav}>
+                <ul className={styles.sidebarCategoryList}>
+                  {category.subcategories.map((sub) => {
+                    const isActive = selectedSubcategory === sub.slug;
+                    return (
+                      <li key={sub.slug}>
+                        <button
+                          type="button"
+                          className={`${styles.sidebarCategoryBtn} ${isActive ? styles.sidebarCategoryBtnActive : ''}`}
+                          onClick={() => setSelectedSubcategory(sub.slug)}
+                        >
+                          {sub.name}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
             <div className={styles.filterHeading}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Filter size={16} /> Filters
