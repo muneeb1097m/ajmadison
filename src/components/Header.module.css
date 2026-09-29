@@ -516,16 +516,23 @@
 .mobilePhoneBtn {
   display: none;
   align-items: center;
-  justify-content: center;
-  color: #111827;
-  padding: 0.4rem;
-  border-radius: 50%;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  gap: 0.45rem;
+  background-color: #f8fafc;
+  color: var(--primary-navy);
+  padding: 0.42rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: 1.5px solid #e2e8f0;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .mobilePhoneBtn:hover {
-  color: #000000;
-  background-color: #f1f5f9;
+  background-color: var(--primary-navy);
+  color: #ffffff;
+  border-color: var(--primary-navy);
 }
 
 /* Mobile Search Dropdown Bar (Expanded) */
@@ -657,20 +664,19 @@
     display: none !important;
   }
   .mobileSearchToggleBtn {
-    display: inline-flex;
+    display: none !important;
   }
   .mobilePhoneBtn {
-    display: inline-flex;
+    display: inline-flex !important;
   }
   .mobileSearchDropdownBar {
-    display: block;
+    display: none !important;
   }
   .cartText {
     display: none;
   }
   .cartButton {
-    padding: 0.45rem 0.7rem;
-    font-size: 0.82rem;
+    display: none !important;
   }
   .logoText {
     font-size: 1.45rem;
@@ -703,7 +709,7 @@
   animation: slideInLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Mobile Drawer Top Utility Row (Screenshot: Order Status | Join Pro | Sign In | X) */
+/* Mobile Drawer Top Utility Row */
 .mobileTopRow {
   display: flex;
   align-items: center;
@@ -728,6 +734,184 @@
   justify-content: center;
   padding: 0.35rem;
   color: #374151;
+}
+
+/* Mobile Drawer Brand in Top Row */
+.mobileDrawerBrand {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerLogoText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.drawerLogoSub {
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+/* Mobile Drawer Search Bar */
+.drawerSearchContainer {
+  padding: 0.85rem 1.25rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.drawerSearchForm {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.drawerSearchIcon {
+  position: absolute;
+  left: 12px;
+  color: #64748b;
+  pointer-events: none;
+}
+
+.drawerSearchInput {
+  width: 100%;
+  padding: 0.65rem 2.2rem 0.65rem 2.35rem;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  background-color: #f8fafc;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.drawerSearchInput:focus {
+  border-color: var(--primary-navy);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(26, 43, 109, 0.12);
+}
+
+.drawerSearchClearBtn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.drawerSearchResults {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 1.25rem;
+  right: 1.25rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1050;
+}
+
+/* Mobile Drawer Shopping Cart Row */
+.drawerCartSection {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  background-color: #ffffff;
+}
+
+.drawerCartButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.95rem;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.drawerCartButton:hover {
+  background-color: #f1f5f9;
+  border-color: var(--primary-navy);
+}
+
+.drawerCartLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.drawerCartIconWrap {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--primary-navy);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.drawerCartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--accent-red);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+.drawerCartText {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerCartTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.drawerCartSub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.drawerCartRight {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.drawerCartActionLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary-navy);
 }
 
 /* Mobile Featured Section (Screenshot: FEATURED) */

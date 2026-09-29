@@ -32,7 +32,6 @@ export default function ProductDetailClient({ product }: Props) {
   const [zipChecked, setZipChecked] = useState(true);
 
   const related = getRelatedProducts(product, 3);
-  const monthlyEst = Math.round(product.price / 24);
 
   const handleZipCheck = (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,10 +148,6 @@ export default function ProductDetailClient({ product }: Props) {
                     Save ${(product.originalPrice - product.price).toLocaleString()}
                   </span>
                 )}
-              </div>
-
-              <div className={styles.financingNote}>
-                Starting at <strong>${monthlyEst}/mo</strong> with 0% APR financing options.
               </div>
 
               {product.rebate && (

@@ -34,25 +34,13 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  // Mobile search state
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
-  const mobileSearchContainerRef = useRef<HTMLDivElement>(null);
-  const mobileSearchBtnRef = useRef<HTMLButtonElement>(null);
+  // Mobile drawer search state
+  const [drawerSearchQuery, setDrawerSearchQuery] = useState('');
+  const [drawerSearchResults, setDrawerSearchResults] = useState<Product[]>([]);
+  const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
+  const drawerSearchRef = useRef<HTMLDivElement>(null);
 
-  const toggleMobileSearch = () => {
-    setMobileSearchOpen((prev) => {
-      const next = !prev;
-      if (next) {
-        setTimeout(() => {
-          mobileSearchInputRef.current?.focus();
-        }, 100);
-      }
-      return next;
-    });
-  };
-
-  // Filter products for search bar autocomplete
+  // Filter products for desktop search bar autocomplete
   useEffect(() => {
     if (searchQuery.trim().length > 1) {
       const q = searchQuery.toLowerCase();
@@ -71,18 +59,33 @@ export default function Header() {
     }
   }, [searchQuery]);
 
-  // Click outside to close search dropdown
+  // Filter products for mobile drawer search autocomplete
+  useEffect(() => {
+    if (drawerSearchQuery.trim().length > 1) {
+      const q = drawerSearchQuery.toLowerCase();
+      const results = PRODUCTS.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.modelNumber.toLowerCase().includes(q) ||
+          p.subCategory.toLowerCase().includes(q)
+      ).slice(0, 5);
+      setDrawerSearchResults(results);
+      setDrawerSearchOpen(true);
+    } else {
+      setDrawerSearchResults([]);
+      setDrawerSearchOpen(false);
+    }
+  }, [drawerSearchQuery]);
+
+  // Click outside to close search dropdowns
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setSearchOpen(false);
       }
-      if (
-        mobileSearchContainerRef.current &&
-        !mobileSearchContainerRef.current.contains(event.target as Node) &&
-        !mobileSearchBtnRef.current?.contains(event.target as Node)
-      ) {
-        setMobileSearchOpen(false);
+      if (drawerSearchRef.current && !drawerSearchRef.current.contains(event.target as Node)) {
+        setDrawerSearchOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -93,9 +96,21 @@ export default function Header() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setSearchOpen(false);
-      setMobileSearchOpen(false);
-      // If there's an exact or first match, go to it or closest category
       const first = searchResults[0];
+      if (first) {
+        router.push(`/product/${first.id}`);
+      } else {
+        router.push(`/closeout-deals`);
+      }
+    }
+  };
+
+  const handleDrawerSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (drawerSearchQuery.trim()) {
+      setDrawerSearchOpen(false);
+      setMobileMenuOpen(false);
+      const first = drawerSearchResults[0];
       if (first) {
         router.push(`/product/${first.id}`);
       } else {
@@ -209,27 +224,14 @@ export default function Header() {
 
           {/* Right Header Actions */}
           <div className={styles.headerActions}>
-            {/* Mobile Search Toggle Pill Button (Matches user screenshot) */}
-            <button
-              ref={mobileSearchBtnRef}
-              type="button"
-              className={styles.mobileSearchToggleBtn}
-              onClick={toggleMobileSearch}
-              aria-label="Toggle Search"
-              aria-expanded={mobileSearchOpen}
-            >
-              <div className={styles.mobileSearchToggleIconWrap}>
-                <Search size={15} />
-              </div>
-            </button>
-
-            {/* Mobile Call Icon Button */}
+            {/* Mobile Call Option (Only item shown on mobile right header) */}
             <a
               href="tel:8005703355"
               className={styles.mobilePhoneBtn}
               aria-label="Call Appliance Experts at 800-570-3355"
             >
-              <Phone size={20} />
+              <Phone size={17} />
+              <span>Call</span>
             </a>
 
             {/* Desktop Appliance Experts Contact */}
@@ -241,6 +243,7 @@ export default function Header() {
               </div>
             </a>
 
+            {/* Desktop Cart Button */}
             <button
               className={styles.cartButton}
               onClick={openCart}
@@ -254,83 +257,6 @@ export default function Header() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Expandable Search Bar */}
-        {mobileSearchOpen && (
-          <div className={styles.mobileSearchDropdownBar} ref={mobileSearchContainerRef}>
-            <form onSubmit={handleSearchSubmit} className={styles.mobileSearchForm}>
-              <Search size={18} className={styles.mobileSearchFormIcon} />
-              <input
-                ref={mobileSearchInputRef}
-                type="text"
-                className={styles.mobileSearchInput}
-                placeholder="Search brands, model #s (e.g. Bosch, Miele)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => searchQuery.trim().length > 1 && setSearchOpen(true)}
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  className={styles.mobileSearchClearBtn}
-                  onClick={() => {
-                    setSearchQuery('');
-                    mobileSearchInputRef.current?.focus();
-                  }}
-                  aria-label="Clear Search Input"
-                >
-                  <X size={15} />
-                </button>
-              )}
-              <button
-                type="button"
-                className={styles.mobileSearchCloseBtn}
-                onClick={() => {
-                  setMobileSearchOpen(false);
-                  setSearchOpen(false);
-                }}
-              >
-                Cancel
-              </button>
-            </form>
-
-            {/* Mobile Search Suggestions Dropdown */}
-            {searchOpen && searchResults.length > 0 && (
-              <div className={styles.mobileSearchResults}>
-                <div className={styles.searchSectionTitle}>Suggested Products & Models</div>
-                {searchResults.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/product/${product.id}`}
-                    className={styles.searchResultItem}
-                    onClick={() => {
-                      setMobileSearchOpen(false);
-                      setSearchOpen(false);
-                      setSearchQuery('');
-                    }}
-                  >
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={44}
-                      height={44}
-                      className={styles.searchResultThumb}
-                    />
-                    <div className={styles.searchResultInfo}>
-                      <div className={styles.searchResultName}>{product.name}</div>
-                      <div className={styles.searchResultMeta}>
-                        {product.brand} · Model: {product.modelNumber}
-                      </div>
-                    </div>
-                    <div className={styles.searchResultPrice}>
-                      ${product.price.toLocaleString()}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
       {/* 4. Desktop Navigation Bar (ONLY USER-REQUESTED PAGES) */}
@@ -591,14 +517,117 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(false)}
           />
           <div className={styles.mobileDrawer} role="dialog" aria-modal="true">
-            {/* Top row with Close X */}
-            <div className={styles.mobileTopRow} style={{ justifyContent: 'flex-end' }}>
+            {/* Top row with Brand Logo and Close X */}
+            <div className={styles.mobileTopRow}>
+              <div className={styles.mobileDrawerBrand}>
+                <span className={styles.drawerLogoText}>
+                  ajmadison<span style={{ color: '#d92525' }}>.</span>
+                </span>
+                <span className={styles.drawerLogoSub}>THE APPLIANCE AUTHORITY</span>
+              </div>
               <button
                 className={styles.mobileCloseBtn}
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <X size={24} />
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Sidebar Search Bar */}
+            <div className={styles.drawerSearchContainer} ref={drawerSearchRef}>
+              <form onSubmit={handleDrawerSearchSubmit} className={styles.drawerSearchForm}>
+                <Search size={17} className={styles.drawerSearchIcon} />
+                <input
+                  type="text"
+                  className={styles.drawerSearchInput}
+                  placeholder="Search appliances, brands, models..."
+                  value={drawerSearchQuery}
+                  onChange={(e) => setDrawerSearchQuery(e.target.value)}
+                  onFocus={() => drawerSearchQuery.trim().length > 1 && setDrawerSearchOpen(true)}
+                />
+                {drawerSearchQuery && (
+                  <button
+                    type="button"
+                    className={styles.drawerSearchClearBtn}
+                    onClick={() => {
+                      setDrawerSearchQuery('');
+                      setDrawerSearchOpen(false);
+                    }}
+                    aria-label="Clear Search Input"
+                  >
+                    <X size={15} />
+                  </button>
+                )}
+              </form>
+
+              {/* Drawer Search Results Autocomplete */}
+              {drawerSearchOpen && drawerSearchResults.length > 0 && (
+                <div className={styles.drawerSearchResults}>
+                  <div className={styles.searchSectionTitle}>Suggested Products</div>
+                  {drawerSearchResults.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/product/${product.id}`}
+                      className={styles.searchResultItem}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setDrawerSearchOpen(false);
+                        setDrawerSearchQuery('');
+                      }}
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={40}
+                        height={40}
+                        className={styles.searchResultThumb}
+                      />
+                      <div className={styles.searchResultInfo}>
+                        <div className={styles.searchResultName}>{product.name}</div>
+                        <div className={styles.searchResultMeta}>
+                          {product.brand} · Model: {product.modelNumber}
+                        </div>
+                      </div>
+                      <div className={styles.searchResultPrice}>
+                        ${product.price.toLocaleString()}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar Shopping Cart Option */}
+            <div className={styles.drawerCartSection}>
+              <button
+                type="button"
+                className={styles.drawerCartButton}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openCart();
+                }}
+              >
+                <div className={styles.drawerCartLeft}>
+                  <div className={styles.drawerCartIconWrap}>
+                    <ShoppingCart size={19} />
+                    {totalItems > 0 && (
+                      <span className={styles.drawerCartBadge}>{totalItems}</span>
+                    )}
+                  </div>
+                  <div className={styles.drawerCartText}>
+                    <span className={styles.drawerCartTitle}>Shopping Cart</span>
+                    <span className={styles.drawerCartSub}>
+                      {totalItems > 0
+                        ? `${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart`
+                        : '0 items in cart'}
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.drawerCartRight}>
+                  <span className={styles.drawerCartActionLabel}>View Cart</span>
+                  <ChevronRight size={17} color="#6b7280" />
+                </div>
               </button>
             </div>
 
