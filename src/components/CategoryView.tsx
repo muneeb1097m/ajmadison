@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronRight, Filter, SlidersHorizontal, RotateCcw } from 'lucide-react';
+import { ChevronRight, Filter, SlidersHorizontal, RotateCcw, X } from 'lucide-react';
 import styles from './CategoryView.module.css';
 import ProductCard from './ProductCard';
 import { CategoryInfo, Product } from '@/data/products';
@@ -32,6 +32,33 @@ export default function CategoryView({
   const [priceRange, setPriceRange] = useState<string>('all');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<string>('featured');
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
+
+  // Active filters count for badges
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (selectedBrands.length > 0) count += selectedBrands.length;
+    if (priceRange !== 'all') count += 1;
+    if (inStockOnly) count += 1;
+    return count;
+  }, [selectedBrands, priceRange, inStockOnly]);
+
+  // Lock body scroll and listen for Escape key when mobile filter popup is open
+  useEffect(() => {
+    if (isMobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsMobileFilterOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileFilterOpen]);
 
   // Extract all unique brands in this category
   const availableBrands = useMemo(() => {
@@ -156,104 +183,139 @@ export default function CategoryView({
               </div>
             )}
 
-            <div className={styles.filterHeading}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Filter size={16} /> Filters
-              </span>
-              {(selectedBrands.length > 0 || priceRange !== 'all' || inStockOnly || selectedSubcategory !== 'all') && (
-                <button
-                  onClick={resetFilters}
-                  style={{ fontSize: '0.75rem', color: 'var(--accent-red)', display: 'flex', alignItems: 'center', gap: '2px' }}
-                >
-                  <RotateCcw size={12} /> Reset
-                </button>
-              )}
+            {/* Mobile Filter Button in Sidebar */}
+            <div className={styles.mobileSidebarFilterWrap}>
+              <button
+                type="button"
+                className={styles.mobileFilterTriggerBtn}
+                onClick={() => setIsMobileFilterOpen(true)}
+              >
+                <div className={styles.mobileFilterBtnLeft}>
+                  <Filter size={16} />
+                  <span>Filters</span>
+                </div>
+                {activeFiltersCount > 0 && (
+                  <span className={styles.filterBadge}>{activeFiltersCount}</span>
+                )}
+              </button>
             </div>
 
-            {/* Brand Filter */}
-            <div className={styles.filterGroup}>
-              <div className={styles.filterGroupTitle}>Brand</div>
-              {availableBrands.map((brand) => (
-                <label key={brand} className={styles.filterOption}>
+            {/* Desktop Filters (Hidden on Mobile) */}
+            <div className={styles.desktopFilters}>
+              <div className={styles.filterHeading}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Filter size={16} /> Filters
+                </span>
+                {(selectedBrands.length > 0 || priceRange !== 'all' || inStockOnly || selectedSubcategory !== 'all') && (
+                  <button
+                    onClick={resetFilters}
+                    style={{ fontSize: '0.75rem', color: 'var(--accent-red)', display: 'flex', alignItems: 'center', gap: '2px' }}
+                  >
+                    <RotateCcw size={12} /> Reset
+                  </button>
+                )}
+              </div>
+
+              {/* Brand Filter */}
+              <div className={styles.filterGroup}>
+                <div className={styles.filterGroupTitle}>Brand</div>
+                {availableBrands.map((brand) => (
+                  <label key={brand} className={styles.filterOption}>
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.includes(brand)}
+                      onChange={() => toggleBrand(brand)}
+                    />
+                    <span>{brand}</span>
+                  </label>
+                ))}
+              </div>
+
+              {/* Price Filter */}
+              <div className={styles.filterGroup}>
+                <div className={styles.filterGroupTitle}>Price</div>
+                <label className={styles.filterOption}>
+                  <input
+                    type="radio"
+                    name="price"
+                    checked={priceRange === 'all'}
+                    onChange={() => setPriceRange('all')}
+                  />
+                  <span>All Prices</span>
+                </label>
+                <label className={styles.filterOption}>
+                  <input
+                    type="radio"
+                    name="price"
+                    checked={priceRange === 'under-1000'}
+                    onChange={() => setPriceRange('under-1000')}
+                  />
+                  <span>Under $1,000</span>
+                </label>
+                <label className={styles.filterOption}>
+                  <input
+                    type="radio"
+                    name="price"
+                    checked={priceRange === '1000-2000'}
+                    onChange={() => setPriceRange('1000-2000')}
+                  />
+                  <span>$1,000 to $2,000</span>
+                </label>
+                <label className={styles.filterOption}>
+                  <input
+                    type="radio"
+                    name="price"
+                    checked={priceRange === '2000-5000'}
+                    onChange={() => setPriceRange('2000-5000')}
+                  />
+                  <span>$2,000 to $5,000</span>
+                </label>
+                <label className={styles.filterOption}>
+                  <input
+                    type="radio"
+                    name="price"
+                    checked={priceRange === 'over-5000'}
+                    onChange={() => setPriceRange('over-5000')}
+                  />
+                  <span>$5,000+ Luxury Suites</span>
+                </label>
+              </div>
+
+              {/* Availability */}
+              <div className={styles.filterGroup}>
+                <div className={styles.filterGroupTitle}>Availability</div>
+                <label className={styles.filterOption}>
                   <input
                     type="checkbox"
-                    checked={selectedBrands.includes(brand)}
-                    onChange={() => toggleBrand(brand)}
+                    checked={inStockOnly}
+                    onChange={(e) => setInStockOnly(e.target.checked)}
                   />
-                  <span>{brand}</span>
+                  <span>In Stock & Ready to Ship</span>
                 </label>
-              ))}
-            </div>
-
-            {/* Price Filter */}
-            <div className={styles.filterGroup}>
-              <div className={styles.filterGroupTitle}>Price</div>
-              <label className={styles.filterOption}>
-                <input
-                  type="radio"
-                  name="price"
-                  checked={priceRange === 'all'}
-                  onChange={() => setPriceRange('all')}
-                />
-                <span>All Prices</span>
-              </label>
-              <label className={styles.filterOption}>
-                <input
-                  type="radio"
-                  name="price"
-                  checked={priceRange === 'under-1000'}
-                  onChange={() => setPriceRange('under-1000')}
-                />
-                <span>Under $1,000</span>
-              </label>
-              <label className={styles.filterOption}>
-                <input
-                  type="radio"
-                  name="price"
-                  checked={priceRange === '1000-2000'}
-                  onChange={() => setPriceRange('1000-2000')}
-                />
-                <span>$1,000 to $2,000</span>
-              </label>
-              <label className={styles.filterOption}>
-                <input
-                  type="radio"
-                  name="price"
-                  checked={priceRange === '2000-5000'}
-                  onChange={() => setPriceRange('2000-5000')}
-                />
-                <span>$2,000 to $5,000</span>
-              </label>
-              <label className={styles.filterOption}>
-                <input
-                  type="radio"
-                  name="price"
-                  checked={priceRange === 'over-5000'}
-                  onChange={() => setPriceRange('over-5000')}
-                />
-                <span>$5,000+ Luxury Suites</span>
-              </label>
-            </div>
-
-            {/* Availability */}
-            <div className={styles.filterGroup}>
-              <div className={styles.filterGroupTitle}>Availability</div>
-              <label className={styles.filterOption}>
-                <input
-                  type="checkbox"
-                  checked={inStockOnly}
-                  onChange={(e) => setInStockOnly(e.target.checked)}
-                />
-                <span>In Stock & Ready to Ship</span>
-              </label>
+              </div>
             </div>
           </aside>
 
           {/* Main Grid & Sort Controls */}
           <div>
             <div className={styles.controlBar}>
-              <div className={styles.resultsCount}>
-                Showing <strong>{filteredProducts.length}</strong> products in {category.name}
+              <div className={styles.controlBarLeft}>
+                {/* Mobile Filter Button */}
+                <button
+                  type="button"
+                  className={styles.mobileControlFilterBtn}
+                  onClick={() => setIsMobileFilterOpen(true)}
+                >
+                  <Filter size={15} />
+                  <span>Filters</span>
+                  {activeFiltersCount > 0 && (
+                    <span className={styles.filterBadge}>{activeFiltersCount}</span>
+                  )}
+                </button>
+
+                <div className={styles.resultsCount}>
+                  Showing <strong>{filteredProducts.length}</strong> products in {category.name}
+                </div>
               </div>
 
               <div className={styles.sortSelectWrap}>
@@ -291,6 +353,142 @@ export default function CategoryView({
           </div>
         </div>
       </div>
+
+      {/* Mobile Filters Pop-up Modal / Sheet */}
+      {isMobileFilterOpen && (
+        <div
+          className={styles.mobileModalOverlay}
+          onClick={() => setIsMobileFilterOpen(false)}
+        >
+          <div
+            className={styles.mobileModalContainer}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-filters-title"
+          >
+            {/* Header */}
+            <div className={styles.mobileModalHeader}>
+              <div className={styles.mobileModalTitleWrap}>
+                <div className={styles.mobileFilterIconCircle}>
+                  <Filter size={18} />
+                </div>
+                <div>
+                  <h3 id="mobile-filters-title" className={styles.mobileModalTitle}>
+                    Filters
+                  </h3>
+                  <span className={styles.mobileModalSubtitle}>
+                    {filteredProducts.length} appliances found
+                  </span>
+                </div>
+                {activeFiltersCount > 0 && (
+                  <span className={styles.mobileFilterActiveBadge}>
+                    {activeFiltersCount} active
+                  </span>
+                )}
+              </div>
+              <button
+                type="button"
+                className={styles.mobileModalCloseBtn}
+                onClick={() => setIsMobileFilterOpen(false)}
+                aria-label="Close filters"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Scrollable Filters Body */}
+            <div className={styles.mobileModalBody}>
+              {/* Brand Filter */}
+              {availableBrands.length > 0 && (
+                <div className={styles.mobileFilterSection}>
+                  <div className={styles.mobileFilterSectionTitle}>Brand</div>
+                  <div className={styles.mobileBrandsGrid}>
+                    {availableBrands.map((brand) => {
+                      const isChecked = selectedBrands.includes(brand);
+                      return (
+                        <label
+                          key={brand}
+                          className={`${styles.mobileBrandCard} ${isChecked ? styles.mobileBrandCardChecked : ''}`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => toggleBrand(brand)}
+                            className={styles.filterCheckbox}
+                          />
+                          <span>{brand}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Price Filter */}
+              <div className={styles.mobileFilterSection}>
+                <div className={styles.mobileFilterSectionTitle}>Price Range</div>
+                <div className={styles.mobilePriceList}>
+                  {[
+                    { id: 'all', label: 'All Prices' },
+                    { id: 'under-1000', label: 'Under $1,000' },
+                    { id: '1000-2000', label: '$1,000 to $2,000' },
+                    { id: '2000-5000', label: '$2,000 to $5,000' },
+                    { id: 'over-5000', label: '$5,000+ Luxury Suites' },
+                  ].map((option) => (
+                    <label
+                      key={option.id}
+                      className={`${styles.mobileRadioOption} ${priceRange === option.id ? styles.mobileRadioOptionActive : ''}`}
+                    >
+                      <input
+                        type="radio"
+                        name="mobile-price"
+                        checked={priceRange === option.id}
+                        onChange={() => setPriceRange(option.id)}
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Availability Filter */}
+              <div className={styles.mobileFilterSection}>
+                <div className={styles.mobileFilterSectionTitle}>Availability</div>
+                <label className={`${styles.mobileAvailabilityOption} ${inStockOnly ? styles.mobileAvailabilityOptionActive : ''}`}>
+                  <input
+                    type="checkbox"
+                    checked={inStockOnly}
+                    onChange={(e) => setInStockOnly(e.target.checked)}
+                    className={styles.filterCheckbox}
+                  />
+                  <span>In Stock & Ready to Ship</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className={styles.mobileModalFooter}>
+              <button
+                type="button"
+                className={styles.mobileModalResetBtn}
+                onClick={resetFilters}
+                disabled={activeFiltersCount === 0}
+              >
+                <RotateCcw size={14} />
+                <span>Reset</span>
+              </button>
+              <button
+                type="button"
+                className={styles.mobileModalApplyBtn}
+                onClick={() => setIsMobileFilterOpen(false)}
+              >
+                Show {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
