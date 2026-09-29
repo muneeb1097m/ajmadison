@@ -158,13 +158,60 @@ export default function CategoryView({
 
       {/* 3. Catalog Main Layout */}
       <div className="container">
+        {/* Mobile Horizontal Subcategory Scroll Bar (Ultra-Compact) */}
+        {category.subcategories && category.subcategories.length > 0 && (
+          <div className={styles.mobileSubcategoryBar}>
+            <div className={styles.mobileSubcategoryScroll}>
+              <button
+                type="button"
+                className={`${styles.mobileSubcategoryChip} ${selectedSubcategory === 'all' ? styles.mobileSubcategoryChipActive : ''}`}
+                onClick={() => setSelectedSubcategory('all')}
+              >
+                <span>All</span>
+                <span className={styles.chipCount}>
+                  {products.filter((p) => p.category === category.slug).length}
+                </span>
+              </button>
+              {category.subcategories.map((sub) => {
+                const isActive = selectedSubcategory === sub.slug;
+                return (
+                  <button
+                    key={sub.slug}
+                    type="button"
+                    className={`${styles.mobileSubcategoryChip} ${isActive ? styles.mobileSubcategoryChipActive : ''}`}
+                    onClick={() => setSelectedSubcategory(sub.slug)}
+                  >
+                    <span>{sub.name}</span>
+                    {sub.count !== undefined && (
+                      <span className={styles.chipCount}>{sub.count}</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <div className={styles.catalogLayout}>
           {/* Filters Sidebar */}
           <aside className={styles.sidebar}>
             {/* Category Navigation (Matches User Screenshot) */}
             {category.subcategories && category.subcategories.length > 0 && (
               <div className={styles.sidebarCategoryNav}>
+                <div className={styles.sidebarSectionTitle}>Categories</div>
                 <ul className={styles.sidebarCategoryList}>
+                  <li>
+                    <button
+                      type="button"
+                      className={`${styles.sidebarCategoryBtn} ${selectedSubcategory === 'all' ? styles.sidebarCategoryBtnActive : ''}`}
+                      onClick={() => setSelectedSubcategory('all')}
+                    >
+                      <span>All {category.name}</span>
+                      <span className={styles.sidebarCategoryCount}>
+                        {products.filter((p) => p.category === category.slug).length}
+                      </span>
+                    </button>
+                  </li>
                   {category.subcategories.map((sub) => {
                     const isActive = selectedSubcategory === sub.slug;
                     return (
@@ -174,7 +221,10 @@ export default function CategoryView({
                           className={`${styles.sidebarCategoryBtn} ${isActive ? styles.sidebarCategoryBtnActive : ''}`}
                           onClick={() => setSelectedSubcategory(sub.slug)}
                         >
-                          {sub.name}
+                          <span>{sub.name}</span>
+                          {sub.count !== undefined && (
+                            <span className={styles.sidebarCategoryCount}>{sub.count}</span>
+                          )}
                         </button>
                       </li>
                     );
@@ -182,23 +232,6 @@ export default function CategoryView({
                 </ul>
               </div>
             )}
-
-            {/* Mobile Filter Button in Sidebar */}
-            <div className={styles.mobileSidebarFilterWrap}>
-              <button
-                type="button"
-                className={styles.mobileFilterTriggerBtn}
-                onClick={() => setIsMobileFilterOpen(true)}
-              >
-                <div className={styles.mobileFilterBtnLeft}>
-                  <Filter size={16} />
-                  <span>Filters</span>
-                </div>
-                {activeFiltersCount > 0 && (
-                  <span className={styles.filterBadge}>{activeFiltersCount}</span>
-                )}
-              </button>
-            </div>
 
             {/* Desktop Filters (Hidden on Mobile) */}
             <div className={styles.desktopFilters}>
@@ -399,6 +432,41 @@ export default function CategoryView({
 
             {/* Scrollable Filters Body */}
             <div className={styles.mobileModalBody}>
+              {/* Subcategories (Compact Grid) */}
+              {category.subcategories && category.subcategories.length > 0 && (
+                <div className={styles.mobileFilterSection}>
+                  <div className={styles.mobileFilterSectionTitle}>Category</div>
+                  <div className={styles.mobileSubcategoryGrid}>
+                    <button
+                      type="button"
+                      className={`${styles.mobileSubcategoryOption} ${selectedSubcategory === 'all' ? styles.mobileSubcategoryOptionActive : ''}`}
+                      onClick={() => setSelectedSubcategory('all')}
+                    >
+                      <span>All {category.name}</span>
+                      <span className={styles.mobileOptionCount}>
+                        {products.filter((p) => p.category === category.slug).length}
+                      </span>
+                    </button>
+                    {category.subcategories.map((sub) => {
+                      const isActive = selectedSubcategory === sub.slug;
+                      return (
+                        <button
+                          key={sub.slug}
+                          type="button"
+                          className={`${styles.mobileSubcategoryOption} ${isActive ? styles.mobileSubcategoryOptionActive : ''}`}
+                          onClick={() => setSelectedSubcategory(sub.slug)}
+                        >
+                          <span>{sub.name}</span>
+                          {sub.count !== undefined && (
+                            <span className={styles.mobileOptionCount}>{sub.count}</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Brand Filter */}
               {availableBrands.length > 0 && (
                 <div className={styles.mobileFilterSection}>
