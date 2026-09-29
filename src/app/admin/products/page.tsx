@@ -118,7 +118,7 @@ export default function AdminProductsPage() {
     isCloseout: false,
     closeoutBadge: '',
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+    image: '/images/products/lg-wm4000hba.jpg',
     description: '',
     specs: {},
   });
@@ -201,12 +201,12 @@ export default function AdminProductsPage() {
       reviewsCount: 15,
       inStock: true,
       deliveryEstimate: 'Free Nationwide Delivery',
-      image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80',
-      gallery: ['https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80'],
+      image: '/images/products/lg-wm4000hba.jpg',
+      gallery: ['/images/products/lg-wm4000hba.jpg'],
       description: 'High efficiency appliance with state-of-the-art engineering.',
       specs: { dimensions: '27" W x 39" H', finish: 'Stainless Steel' },
     });
-    const defaultImg = 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80';
+    const defaultImg = '/images/products/lg-wm4000hba.jpg';
     setImageList([defaultImg]);
     setNewImageUrl('');
     setIsModalOpen(true);
@@ -234,7 +234,7 @@ export default function AdminProductsPage() {
     const primaryImage =
       imageList[0] ||
       formData.image ||
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80';
+      '/images/products/lg-wm4000hba.jpg';
 
     const completeProduct: Product = {
       id: productId,

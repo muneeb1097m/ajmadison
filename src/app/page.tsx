@@ -154,7 +154,7 @@ export default function HomePage() {
           </div>
           <div className={styles.promoImageWrap}>
             <Image
-              src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
+              src="/images/hero_center_kitchen.png"
               alt="Kitchen Package Rebates"
               fill
               style={{ objectFit: 'cover' }}
@@ -211,7 +211,7 @@ export default function HomePage() {
           </div>
           <div className={styles.promoImageWrap}>
             <Image
-              src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80"
+              src="/images/hero_middle_frame.png"
               alt="Kitchen Consultation"
               fill
               style={{ objectFit: 'cover' }}
@@ -265,7 +265,7 @@ export default function HomePage() {
           </div>
           <div className={styles.promoImageWrap}>
             <Image
-              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+              src="/images/products/lg-washtower-wkgx201hwa.jpg"
               alt="White-Glove Delivery Specialist"
               fill
               style={{ objectFit: 'cover' }}
@@ -319,7 +319,7 @@ export default function HomePage() {
           </div>
           <div className={styles.promoImageWrap}>
             <Image
-              src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=800&q=80"
+              src="/images/products/bosch-shp78cm5n-1.jpg"
               alt="Ultra Quiet Kitchen Dishwasher"
               fill
               style={{ objectFit: 'cover' }}
@@ -376,7 +376,7 @@ export default function HomePage() {
           </div>
           <div className={styles.promoImageWrap}>
             <Image
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+              src="/images/hero_center_kitchen.png"
               alt="Luxury Kitchen Design Architecture"
               fill
               style={{ objectFit: 'cover' }}
